@@ -71,10 +71,11 @@ else
 	</div>
 
 
+
 	<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
 	<div id="ventana-reporte" class="modal">
 		<p>Reportar por coordenadas</p>
-		<form>
+		<form enctype="multipart/form-data">
 			<label for="cx_form">Coordenada X:</label><br>
 			<input type="text" id="cx_form" name="cx_form"><br>
 			<label for="cy_form">Coordenada Y:</label><br>
@@ -82,24 +83,29 @@ else
 			
 			<label for="opciones_form">Seleccione de la lista:</label><br>
 			<select id="opciones_form" name="opciones_form">
-			<option value="op1">Opcion 1</option>
-			<option value="op2">Opcion 2</option>
-			<option value="op3">Opcion 3</option>
-			<option value="op4">Opcion 4</option>
+			<option value="violencia">Violencia</option>
+			<option value="accidentes">Accidente</option>
+			<option value="hurtos">Hurtos</option>
+			<option value="bloqueos">Bloqueos</option>
+			<option value="Incendios">Incendios</option>
+			<option value="DesNaturales">Desastres naturales</option>
+
+
 			</select>
 			<br>
 
-			<label for="nombre_form">Nombre Quien Reporta:</label><br>
-			<input type="text" id="nombre_form" name="nombre_form"><br>
+			<label for="descrip_form">Descripcion del reporte:</label><br>
+			<input type="text" id="descrip_form" name="descrip_form"><br>
 
-			<label for="valor_form">Valor (entre 1 y 100):</label>
-  			<input type="number" id="valor_form" name="valor_form" min="1" max="100">
-
+			<label for="foto_form">Foto: </label>
+  			<input type="file" id="foto_form" name="foto_form" accept=".jpg,.png">
 			<br>
 			<input type="button" id="boton-envio-reporte" value="Enviar Reporte">
 		  </form>
 		  <div id="div_mensaje_ventana_reporte"></div>
 	</div>
+
+
 
 
 
@@ -113,6 +119,7 @@ else
 	  echo 'Este es id del usuario logueado  : '.$_SESSION["iduser"];
 	  echo '<br>';
 	?>
+	
 
 
 	<!-- Boton Ruteo entre dos puntos -->
@@ -652,14 +659,16 @@ else
 		var cx_ = $('#cx_form').val();
 		var cy_ = $('#cy_form').val();
 		var opcion_ = $('#opciones_form').val();
-		var nombre_ = $('#nombre_form').val();
-		var valor_ = $('#valor_form').val();
+		var descripcion_ = $('#descrip_form').val();
+		var usuario_= "<?php echo $_SESSION["iduser"];?>";
+		var foto_=$('#foto_form').val();
+
 
 		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
 		$.post("src/funciones.php",
 			{
 				peticion: 'registro-desde-ventana-modal', 
-				parametros: {  x:cx_ ,  y: cy_,  opcion: opcion_ , nombre: nombre_, valor: valor_  }
+				parametros: {  x:cx_ ,  y: cy_,  tipo: opcion_ , descripcion: descripcion_, usuario : usuario_, foto : foto_}
 			},
 			function(data, status){
 				console.log("Datos recibidos: " + data + "\nStatus: " + status);
@@ -690,9 +699,8 @@ else
 
 		//Limpio los campos del formulario
 		$('#opciones_form').val("");
-		$('#nombre_form').val("");
 		$('#descripcion_form').val("");
-		$('#valor_form').val("");
+		$('#foto_form').val("")
 		$('#div_mensaje_ventana_reporte').html("");
 
 		// lanzo ventana modal para registrar datos de reporte
@@ -703,7 +711,6 @@ else
   				clickClose: false,
 			});
 	}
-
 
     //funcion mapa de calor Semana15
 	var arrayPoints='[';

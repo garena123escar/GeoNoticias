@@ -145,11 +145,14 @@
 		{
 			$px = $parametros['x'];
 			$py = $parametros['y'];
-			$popcion = $parametros['opcion'];
-			$pnombre = $parametros['nombre'];
-			$pvalor = $parametros['valor'];
+			$ptipo = $parametros['tipo'];
+			$pdescripcion = $parametros['descripcion'];
+			$usuario= $parametros['usuario'];
+			$foto=$parametros['foto'];
 
-			$sql = "INSERT INTO reporte_ejemplo(x,y,opcion_registrada,nombre,valor,fecha_registro)VALUES($px,$py,'$popcion','$pnombre',$pvalor,now());";
+
+
+			$sql = "INSERT INTO reporte(x,y,tipo,descripcion,fecha_registro,id_usuario, foto)VALUES($px,$py,'$ptipo','$pdescripcion',now(),'$usuario', '$foto');";
 			$query = pg_query($dbcon,$sql);
 
 			if($query)
