@@ -289,7 +289,7 @@ else
 		//Recupero los edificios desde la base de datos		
 		cargarEdificios();
 		//hago zoom hacia univalle
-		mymap.flyTo([3.372472, -76.533229], 16);
+		//mymap.flyTo([3.372472, -76.533229], 16);
 	}).addTo( mymap );
 
 
@@ -298,7 +298,7 @@ else
 		//Recupero los sitios de interes desde la base de datos		
 		cargarSitiosInteres();
 		//hago zoom hacia univalle
-		mymap.flyTo([3.372472, -76.533229], 16);
+		//mymap.flyTo([3.372472, -76.533229], 16);
 	}).addTo( mymap );
 
 
@@ -319,7 +319,7 @@ else
 	{
 		document.getElementById('mapid').style.cursor = 'crosshair';
 		flag_registrar=true;
-		mymap.flyTo([3.372472, -76.533229], 16);
+		//mymap.flyTo([3.372472, -76.533229], 16);
 	}).addTo( mymap );
 
 
