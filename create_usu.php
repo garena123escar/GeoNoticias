@@ -104,7 +104,7 @@ los datos
 			<button type="submit">Registrar usuario</button>
 			<br><br>
 			<!-- Enlace a listado de Edificios -->
-			<a href="sig3/Semana15/Semana15/index.php">iniciar Sesión</a>
+			<a href="sig3/PaginaWeb/index.php">iniciar Sesión</a>
 		</form>
 		</div>
 

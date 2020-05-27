@@ -117,7 +117,7 @@
 		<div class="display-6 col-6 col-sm-6 col-md-8 col-lg-8 col-xl-6 borde1 text-center"><br><br><br><br><br>	
 Usuario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="caja_usuario" class="text-center" value=""></input><br><br>	
 Password:&nbsp;&nbsp; <input type="password" id="caja_password"  value=""></input><br><br>
-<a href="/sig3/Semana15/Semana15/create_usu.php">registrar usuario</a>
+<a href="/sig3/PaginaWeb/create_usu.php">registrar usuario</a>
 <button id="boton1">Ingresar al Sistema</button>
 </div>
 		<div class="display-6 col-3 col-sm-3 col-md-2 col-lg-2 col-xl-3  text-center"></div>
