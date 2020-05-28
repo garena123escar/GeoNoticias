@@ -101,7 +101,66 @@ else
 	
 </head>
 <body>
+<!--prueba_1-->
+<!-- modal -->
 
+<div class="container-fluid">
+<div id="fsModal"
+     class="modal animated bounceIn modal-lg modal-sm"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+  <!-- dialog -->
+  <div class="modal-dialog">
+
+    <!-- content -->
+    <div class="modal-content">
+
+      <!-- header -->
+      <div class="modal-header">
+        <h1 id="myModalLabel"
+            class="modal-title">
+          ¿Quienes somos?
+        </h1>
+      </div>
+      <!-- header -->
+      
+      <!-- body -->
+      <div class="modal-body text-justify">
+        <h2>Misión</h2>
+
+        <p>Debido a la creciente necesidad de espacializar la información de último minuto se hace necesario  la creación de herramientas de tipo espacial que permitar realizar dicha acción, teniendo en cuenta  qué según información oficial, la ciudad de Santiago de Cali, es una de las ciudades más peligrosas del país. Sin embargo, la función de este sistema, no es netamente el reporte de la inseguridad, o casos de violencia. Es un sistema innovador que pretende dar conocimiento a la ciudadania sobre las acciones de caracter noticioso que ocurren día a día en la ciudad. Dando así alcance a la ciudadania sobre las acciones que ocurren en su entorno espacial.</p>
+
+      <h2>Visión</h2>
+
+        <p>En los próximos años, posicionarse como un medio de comunicación alimentado además, creado por y para los usuarios Caleños. <br> <br><br>
+	Ser el primer medio de reporte continúo entre autoridades y comunidad. Teniendo en cuenta, qué, no solo se podrán reportar hechos delictivos, sino, manifestaciones, atascos, eventos de gran magnitud, entre otros.
+</p>
+
+      </div>
+      <!-- body -->
+
+      <!-- footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary"
+                data-dismiss="modal">
+          close
+        </button>
+      </div>
+      <!-- footer -->
+
+    </div>
+    <!-- content -->
+
+  </div>
+  <!-- dialog -->
+
+</div>
+</div>
+<!-- modal -->
+<!-- fin prueba_1-->
 	<!-- Contenido HTML de la Ventana Modal -->
 <!--	<div id="ex1" class="modal">
 		<p>Hola este contenido del ejemplo 1 de una ventana modal</p>
@@ -109,7 +168,60 @@ else
 	</div> 
 -->
 
+	<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
+	<div id="ventana-consulta" class="modal">
+		<div class="modal-header">
+		<h3 class="modal-title" id="myModalLabel">Consultar tipo de noticia por comuna</h3>
 
+           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+		<form enctype="multipart/form-data">
+			
+			<label for="opciones_form1">Seleccione el tipo de noticia:</label><br>
+			<select id="opciones_form1" name="opciones_form1">
+			<option value="violencia">Violencia</option>
+			<option value="accidentes">Accidente</option>
+			<option value="hurtos">Hurtos</option>
+			<option value="bloqueos">Bloqueos</option>
+			<option value="Incendios">Incendios</option>
+			<option value="DesNaturales">Desastres naturales</option>
+			</select>
+			<br>
+
+            <form enctype="multipart/form-data">
+			
+			<label for="opciones_form2">Seleccione la comuna:</label><br>
+			<select id="opciones_form2" name="opciones_form2">
+			<option value="1">Comuna 1</option>
+			<option value="2">Comuna 2</option>
+			<option value="3">Comuna 3</option>
+			<option value="4">Comuna 4</option>
+			<option value="5">Comuna 5</option>
+			<option value="6">Comuna 6</option>
+            <option value="7">Comuna 7</option>
+			<option value="8">Comuna 8</option>
+			<option value="9">Comuna 9</option>
+			<option value="10">Comuna 10</option>
+			<option value="11">Comuna 11</option>
+			<option value="12">Comuna 12</option>
+            <option value="13">Comuna 13</option>
+			<option value="14">Comuna 14</option>
+			<option value="15">Comuna 15</option>
+			<option value="16">Comuna 16</option>
+			<option value="17">Comuna 17</option>
+			<option value="18">Comuna 18</option>
+            <option value="19">Comuna 19</option>
+			<option value="20">Comuna 20</option>
+			<option value="21">Comuna 21</option>
+            <option value="22">Comuna 22</option>
+			</select>
+			<br>
+			
+			<input type="button" id="boton-envio-consulta" value="Consultar">
+		  </form>
+		  <div id="div_mensaje_ventana_consulta´"></div>
+	</div>
 
 	<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
 	<div id="ventana-reporte" class="modal">
@@ -165,7 +277,7 @@ else
 
     <div class="navbar-header ">
     <div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center"> 	
-    <a class="navbar-brand text" href="javascript:location.reload()">Geonoticias univalle</a>
+    <a class="navbar-brand text" href="javascript:location.reload()"><h2>Geonoticias univalle</h2></a>
 
     </div>
 
@@ -173,18 +285,13 @@ else
     </div>
     <ul class="nav navbar-nav">
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg"  id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         ¿Quienes somos?
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Misión</a>
-          <a class="dropdown-item" href="#">Visión</a>
-      </div>
-      </li>
+
+        <li class="active"><a class="  btn btn-outline-danger btn-lg"  data-toggle="modal" aria-haspopup="true" 
+        data-target="#fsModal"  > <h5>¿Quienes somos?</h5></a></li>
+
         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg" href="quienes_somos.php" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Contáctenos
+        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
+         <h5>Contáctenos</h5>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
           <a class="dropdown-item" href="https://www.facebook.com/esteban8atorres">Facebook</a>
@@ -192,7 +299,8 @@ else
           <a class="dropdown-item" href="https://www.webwhatsapp.com">Whatsapp</a>       
       </div>
       </li>
-      <li class="active"><a href="index.php?op=salir" class="btn btn-outline-danger btn-lg">Cerrar sesión</a></li>
+      <li class="active"><a href="index.php?op=salir" class="btn btn-outline-danger btn-lg"><h5>Cerrar sesión</h5></a></li>
+ 
     </ul>
 
   </div>
@@ -207,7 +315,10 @@ else
 <div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-4 text-center">  <br>	
 <input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-lg" > 
 		<div id="informacion_sobre_ruta"></div><br>
-		  <p><a href="#ventana-reporte" rel="modal:open" class="btn btn-danger bt-lg" >&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Registrar reporte &nbsp;&nbsp;</a></p>
+
+<input id="boton_reportes" value="Crear reporte"class="btn btn-danger bt-lg" > <br><br>
+
+<input id="boton_consulta_1" value="Reporte por comuna"class="btn btn-danger bt-lg" >
 
 </div>
 
@@ -241,7 +352,7 @@ else
 
   
   <!-- Link para abir la ventana modal -->
- <p><a href="#ex1" rel="modal:open">Abrir ventana modal (ejemplo 1)</a></p>
+ <!-- <p><a href="ventana-consulta" rel="modal:open">Abrir ventana modal (ejemplo 1)</a></p>-->
 
   <!-- Link para abir la ventana modal -->
 
@@ -317,6 +428,35 @@ else
 	  	document.getElementById('mapid').style.cursor = 'crosshair';
 	});
 
+	var consulta=false;
+
+	//Evento click para boton_reporte
+	$( "#boton_reportes" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+		//mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "Marque el sitio del evento" );
+	  	//Cambio de estado la vabriable bandera
+		consulta=true;
+	  	//Cambio el cursor 	del mouse sobre el mapa
+	  	document.getElementById('mapid').style.cursor = 'crosshair';
+	});
+
+	var consulta_1=false;
+
+	//Evento click para boton_reporte
+	$( "#boton_consulta_1" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+		//mymap.flyTo([3.372472, -76.533229], 16);
+		alert("Seleccione la comuna y el tipo de Noticia o evento");
+	  	//Cambio de estado la vabriable bandera
+		consulta_1=true;
+
+		lanzarVentanaconsulta();
+	  	//Cambio el cursor 	del mouse sobre el mapa
+	  	//document.getElementById('mapid').style.cursor = 'crosshair';
+	});
 
 
 	
@@ -340,10 +480,16 @@ else
 			funcionNueva();
 		}
 	else
-		if(flag_registrar)
+		if(consulta)
 		{
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 			lanzarVentanaRegistro(e);
+		}
+	else
+		if(consulta_1)
+		{
+			//caso para lanzar ventana modal una vez de click sobre el mapa
+		lanzarVentanaconsulta();
 		}
 	}
 
@@ -365,10 +511,10 @@ else
 
 	L.easyButton('<img src="images/smile.png">', function(btn, map)
 	{
-		var coordenadas = [3.483820,-76.509149];
-		map.setView(coordenadas);
-		
-		helloPopup.setLatLng(coordenadas).openOn(map);
+		//var coordenadas = [3.483820,-76.509149];
+		//map.setView(coordenadas);
+		lanzarVentanaconsulta();
+		//helloPopup.setLatLng(coordenadas).openOn(map);
 	}).addTo( mymap );
 
 	L.easyButton('<img src="images/icono1.png" width="20px">', function(btn, map)
@@ -671,7 +817,8 @@ else
 	}
 
 
-
+	var capaGeojsonreporte = L.geoJson();
+	var geojsonFeatureconsulta;
 
 	var capaGeojsonvias = L.geoJson();
 	var geojsonFeaturevia;
@@ -872,6 +1019,94 @@ function recuperarvias()
   				clickClose: true,
 			});
 	}
+//CONSULTA 1
+
+//icono para cada reporte
+
+function onEachFeatureconsulta(feature, layer) 
+	{
+			
+		console.log(feature.properties.comuna);
+		if (feature.properties && feature.properties.comuna) 
+		{
+			var mensaje ='<b><b>ID: </b>' +feature.properties.id_reporte;
+			mensaje +='<br><b>Barrio: </b> '+feature.properties.comuna;
+			mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
+			mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
+			
+
+			layer.bindPopup(mensaje);
+		}
+    }	
+
+
+$("#boton-envio-consulta").click(function() 
+	{
+		console.log('Enviar formulario y cerrar ventana modal');
+		//capturar los datos del formulario
+
+		var comuna_= $('#opciones_form2').val();
+		var opcion_ = $('#opciones_form1').val();
+	
+
+		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
+		$.post("src/funciones.php",
+			{
+				peticion: 'Reportes-x-comuna', 
+				parametros: { comuna:comuna_, tipo: opcion_ }
+			},
+			function(data, status){
+				console.log("Datos recibidos: " + data + "\nStatus: " + status);
+				if(status=='success')
+				{
+					//console.log(data);
+					//mymap.removeLayer(capaGeojsonconsulta); 
+                    geojsonFeatureconsulta= eval('('+data+')');
+                    
+
+                    capaGeojsonconsulta = L.geoJson(geojsonFeatureconsulta,
+                    {
+						pointToLayer: function (feature, latlng) 
+						{
+							//Icons from https://mapicons.mapsmarker.com/
+							var smallIcon = L.icon(
+							{
+							iconSize: [27, 27],
+							iconAnchor: [13, 27],
+							popupAnchor:  [1, -24],
+							iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
+						});
+						
+							return L.marker(latlng, {icon: smallIcon}); 
+						},onEachFeature: onEachFeatureconsulta
+						
+					} ).addTo(mymap);
+
+				}
+			});	
+		//Para cerrar la ventana modal	
+		$.modal.close();
+	});
+
+
+	function lanzarVentanaconsulta(e)
+	{
+	
+		//Limpio los campos del formulario
+		$('#opciones_form1').val("");
+		$('#opciones_form2').val("");
+		$('#div_mensaje_ventana_consulta').html("");
+
+		// lanzo ventana modal para consulta
+		$('#ventana-consulta').modal(
+			{
+				closeExisting: false,
+				escapeClose: true,
+  				clickClose: true,
+			});
+	}
+
+
 
     //funcion mapa de calor Semana15
 	var arrayPoints='[';
@@ -966,7 +1201,7 @@ function recuperarvias()
 <script type="text/javascript">
   function actualizar(){location.reload(true);}
 //Función para actualizar cada 25 segundos(4000 milisegundos)
-  setInterval("actualizar()",60000);
+  setInterval("actualizar()",60000000);
 </script>
 <!--<div class="container-fluid">
 <br>	
@@ -975,8 +1210,8 @@ function recuperarvias()
 		<div class="display-6 col-4 col-sm-4 col-md-8 col-lg-8 col-xl-4 borde2 text-center"><p>UNIVERSIDAD DEL VALLE <br>ESCUELA DE INGENIERÍA CIVIL Y GEOMÁTICA <br> INGENIERÍA TOPOGRÁFICA</p></div>
 		<div class="display-6 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 border text-center"><p>GeoNoticias <br> Santiago de Cali <br> 2020</p></div>
 
-	</div>
--->
+	</div>-->
+
 
 </body>
 </html>
