@@ -303,7 +303,7 @@ else
 	L.easyButton('<img src="images/icono2.png" width="20px">', function(btn, map)
 	{
 		//Recupero los sitios de interes desde la base de datos		
-		cargarSitiosInteres();
+		cargarreporte();
 		//hago zoom hacia univalle
 		//mymap.flyTo([3.372472, -76.533229], 16);
 	}).addTo( mymap );
@@ -314,9 +314,10 @@ else
 	var flag_otro=false;
 	L.easyButton('<img src="images/icono4.png" width="20px">', function(btn, map)
 	{
-		document.getElementById('mapid').style.cursor = 'crosshair';
-                flag_otro=true;
-		mymap.flyTo([3.372472, -76.533229], 16);
+		recuperarvias();
+		//document.getElementById('mapid').style.cursor = 'crosshair';
+                //flag_otro=true;
+		//mymap.flyTo([3.372472, -76.533229], 16);
 	}).addTo( mymap );
 
     //Semana 13
@@ -592,7 +593,8 @@ else
 
 
 
-
+	var capaGeojsonvias = L.geoJson();
+	var geojsonFeaturevia;
 	
 
 
@@ -603,7 +605,7 @@ else
 	//Creo estilo para la linea que representara la ruta
 	var miEstiloLinea1Ruta = {
 		"color": "#ff0000",
-		"weight": 6,
+		"weight": 1,
 		"opacity": 0.8
 	};
 	//Pinto la ruta en el mapa
@@ -647,7 +649,89 @@ else
 			}
 		});
 	}
+//REPORTES
+    var capaGeojsonreporte = L.geoJson();
+	function cargarreporte()
+	{
+		//Hago la peticion recupera-edificios-geojson mediante el metodo post a funciones.php		
+		$.post("src/funciones.php",
+			{
+				peticion: 'Recupera-reportes'
+			},
+			function(data, status){
+				console.log("Datos recibidos: " + data + "\nStatus: " + status);
+				if(status=='success')
+				{
+					//console.log(data);
+					mymap.removeLayer(capaGeojsonreporte); 
+                    geojsonFeaturereporte= eval('('+data+')');
+                    
 
+                    capaGeojsonreporte = L.geoJson(geojsonFeaturereporte,
+                    {
+						pointToLayer: function (feature, latlng) 
+						{
+							//Icons from https://mapicons.mapsmarker.com/
+							var smallIcon = L.icon(
+							{
+							iconSize: [27, 27],
+							iconAnchor: [13, 27],
+							popupAnchor:  [1, -24],
+							iconUrl: 'images/icono_hurtos.png' 
+						});
+						
+							return L.marker(latlng, {icon: smallIcon}); 
+						},onEachFeature: onEachFeaturereporte
+						
+					} ).addTo(mymap);
+
+				}
+			});	
+	} 
+    
+
+
+    
+	//Para cada edificio
+	function onEachFeaturereporte(feature, layer) 
+	{
+		//Asigno estilo a cada edificio		
+		console.log(feature.properties.barrio);
+		if (feature.properties && feature.properties.barrio) 
+		{
+			var mensaje ='<br><b>ID: </b>' +feature.properties.id_reporte;
+			mensaje +='<b>Barrio: </b> '+feature.properties.barrio;
+			mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
+			mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
+			
+
+			layer.bindPopup(mensaje);
+		}
+    }	
+//Pinto la ruta en el mapa
+function recuperarvias()
+	{
+		$.post("src/funciones.php",
+		{
+			peticion: 'recupera-via',
+		},
+		function(data, status)
+		{
+			console.log("Datos recibidos: " + data + "\nStatus: " + status);
+			if(status=='success')
+			{
+				mymap.removeLayer(capaGeojsonvias); 
+				layerControl._update();
+				geojsonFeaturevia= eval('('+data+')');
+
+				capaGeojsonvias = L.geoJson(geojsonFeaturevia,  {style: miEstiloLinea1Ruta  }).addTo(mymap);
+				//layerControl.addOverlay(capaGeojsonRuta,"Ruta mas Corta ("+ contadorRutasGeneradas + " )" ,"Rutas");
+				mymap.addLayer(capaGeojsonvias); 
+				layerControl._update();
+				capaGeojsonvias.addTo( mymap );
+            }
+        });    
+    }   
 
 	//Evento click para boton boton-envio-reporte
 	$("#boton-envio-reporte").click(function() 
