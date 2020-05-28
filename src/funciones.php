@@ -112,6 +112,30 @@
 			break;
 		}
 
+
+		case 'Reportes-x-comuna':
+			{
+				$comuna = $parametros['comuna'];
+				$tipo = $parametros['tipo'];
+
+				$sql="SELECT row_to_json(fc)
+				FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
+				FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json
+				((SELECT l FROM (SELECT  lg.comuna, lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
+				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , c.comuna, r.tipo, r.descripcion, r.id_reporte FROM
+		   comuna as c, reporte as r
+		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), c.geom ) and c.comuna = '$comuna' and r.tipo ='$tipo'
+		   ) As lg   
+		   ) As f )  As fc;";
+				  
+				  $query3 = pg_query($dbcon,$sql);
+				  $row = pg_fetch_row($query3);
+				  echo $row[0];
+			  break;
+			}
+
+
+
 		//CASO PARA RETORNAR vias
 		case 'recupera-via':
 			{
