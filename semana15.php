@@ -1032,7 +1032,7 @@ $("#boton-envio-consulta").click(function()
 						function onEachFeature(feature, layer) 
 						{
 							//var alea=Math.floor((Math.random() * 100) + 1);
-							arrayPoints+='['+feature.geometry.coordinates[1]+','+feature.geometry.coordinates[0]+',"'+feature.properties.valor+'"],';	
+							arrayPoints+='['+feature.geometry.coordinates[1]+','+feature.geometry.coordinates[0]+',"15"],';	
 						} 
 					});
 					var y=arrayPoints.substring(0, arrayPoints.length - 1);
