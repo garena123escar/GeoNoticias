@@ -649,11 +649,11 @@ else
 			}
 		});
 	}
-//REPORTES
+// Recuperacion de los reportes de noticias
     var capaGeojsonreporte = L.geoJson();
 	function cargarreporte()
 	{
-		//Hago la peticion recupera-edificios-geojson mediante el metodo post a funciones.php		
+		//Hago la peticion recupera-reportes mediante el metodo post a funciones.php		
 		$.post("src/funciones.php",
 			{
 				peticion: 'Recupera-reportes'
@@ -662,7 +662,7 @@ else
 				console.log("Datos recibidos: " + data + "\nStatus: " + status);
 				if(status=='success')
 				{
-					//console.log(data);
+					
 					mymap.removeLayer(capaGeojsonreporte); 
                     geojsonFeaturereporte= eval('('+data+')');
                     
@@ -671,13 +671,13 @@ else
                     {
 						pointToLayer: function (feature, latlng) 
 						{
-							//Icons from https://mapicons.mapsmarker.com/
+							
 							var smallIcon = L.icon(
 							{
 							iconSize: [27, 27],
 							iconAnchor: [13, 27],
 							popupAnchor:  [1, -24],
-							iconUrl: 'images/icono_hurtos.png' 
+							iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
 						});
 						
 							return L.marker(latlng, {icon: smallIcon}); 
@@ -692,10 +692,10 @@ else
 
 
     
-	//Para cada edificio
+	//icono para cada reporte
 	function onEachFeaturereporte(feature, layer) 
 	{
-		//Asigno estilo a cada edificio		
+			
 		console.log(feature.properties.barrio);
 		if (feature.properties && feature.properties.barrio) 
 		{
@@ -708,7 +708,8 @@ else
 			layer.bindPopup(mensaje);
 		}
     }	
-//Pinto la ruta en el mapa
+
+//para recuperar las vias
 function recuperarvias()
 	{
 		$.post("src/funciones.php",
@@ -725,7 +726,6 @@ function recuperarvias()
 				geojsonFeaturevia= eval('('+data+')');
 
 				capaGeojsonvias = L.geoJson(geojsonFeaturevia,  {style: miEstiloLinea1Ruta  }).addTo(mymap);
-				//layerControl.addOverlay(capaGeojsonRuta,"Ruta mas Corta ("+ contadorRutasGeneradas + " )" ,"Rutas");
 				mymap.addLayer(capaGeojsonvias); 
 				layerControl._update();
 				capaGeojsonvias.addTo( mymap );
