@@ -273,11 +273,11 @@
 		{
 				$sql3="SELECT row_to_json(fc)
 				FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
-				FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.the_geom)::json As geometry, row_to_json
-				((SELECT l FROM (SELECT  lg.barrio , lg.comuna, lg.estra_moda , lg.valor,  lg.opcion_registrada  ) As l)) As properties
-				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as the_geom , b.barrio, b.comuna, b.estra_moda, r.valor, r.opcion_registrada FROM
-		   barrios_cali as b, reporte_ejemplo as r
-		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), b.the_geom )
+				FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json
+				((SELECT l FROM (SELECT  lg.barrio, lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
+				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , b.barrio, r.tipo, r.descripcion, r.id_reporte FROM
+		   barrios as b, reporte as r
+		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), b.geom )
 		   ) As lg   
 		   ) As f )  As fc;";
 	   

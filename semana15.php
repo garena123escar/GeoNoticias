@@ -428,17 +428,15 @@ else
 	{
 		//Recupero los edificios desde la base de datos		
 		cargarEdificios();
-		//hago zoom hacia univalle
-		mymap.flyTo([3.372472, -76.533229], 16);
+		
 	}).addTo( mymap );
 
 
 	L.easyButton('<img src="images/icono2.png" width="20px">', function(btn, map)
 	{
 		//Recupero los sitios de interes desde la base de datos		
-		cargarreporte();
-		//hago zoom hacia univalle
-		//mymap.flyTo([3.372472, -76.533229], 16);
+		//cargarreporte();
+		
 	}).addTo( mymap );
 
 
@@ -471,7 +469,7 @@ else
 	}).addTo( mymap );
 
 	//Semana 15  --  Boton Para Mapa de Cluster
-	L.easyButton('<img src="images/icono_op1.png" width="20px">', function(btn, map)
+	L.easyButton('<img src="images/noticias.png" width="20px">', function(btn, map)
 	{
 		cargarCluster();
 	}).addTo( mymap );
@@ -1049,10 +1047,9 @@ $("#boton-envio-consulta").click(function()
 		if (feature.properties) 
 		{	
 		    var mensaje="Barrio: <b>"+feature.properties.barrio+"</b><br>";
-		    mensaje+="Comuna: "+feature.properties.comuna+"<br>";
-		    mensaje+="Estrato: "+feature.properties.estra_moda+"<br>";
-		    mensaje+="Valor: "+feature.properties.valor+"<br>";
-		    mensaje+="Opcion Registrada: "+feature.properties.opcion_registrada+"<br>";			
+		    mensaje+="Tipo: "+feature.properties.tipo+"<br>";
+		    mensaje+="descripcion: "+feature.properties.descripcion+"<br>";
+		    mensaje+="ID: "+feature.properties.id_reporte+"<br>";		
 		    layer.bindPopup(''+mensaje+'');
 		}
 	}
@@ -1084,7 +1081,7 @@ $("#boton-envio-consulta").click(function()
 							  iconSize: [27, 27],
 							  iconAnchor: [13, 27],
 							  popupAnchor:  [1, -24],
-							  iconUrl: 'images/icono_'+feature.properties.opcion_registrada+'.png' 
+							  iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
 						        });
 						
 							return L.marker(latlng, {icon: smallIcon}); 
