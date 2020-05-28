@@ -49,16 +49,54 @@ else
 	 <link rel="stylesheet" href="lib/leaflet-markercluster/MarkerCluster.css" />
 	<link rel="stylesheet" href="lib/leaflet-markercluster/MarkerCluster.Default.css" />
 	<script src="lib/leaflet-markercluster/leaflet.markercluster.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 
 
+	
     <!--  CSS -->
 	<style>
 		table, th, td {
   			border: 1px solid black;
 		}
 	</style>
-	
+		<style type="text/css">.borde1{
+		background-color: red;
+		width: 100px;
+		height: 160px;
+		
+	}
+		<style type="text/css">.borde1{
+		background-color: red;
+		width: 100px;
+		height: 160px;
+		
+	}
+	</style>
 
+	<style type="text/css">.borde2{
+		background-color: red;
+		height: 80px
+	}
+		</style>
+
+	<style>
+		.slider{
+		background: url(img/bg-1.jpg);
+		height: 100vh;
+		background-size: cover;
+		background-position: center;
+	}.slider2{
+		background-color: #FAFAFA;
+		height: 100vh;
+		background-size: cover;
+		background-position: center;
+	}
+	</style>
 
 	
 </head>
@@ -105,29 +143,84 @@ else
 		  <div id="div_mensaje_ventana_reporte"></div>
 	</div>
 
+<body>
+
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid"> 
+   <div class="row">
+ <!--<div class="display-1 col-6 col-sm-6 col-md-6 col-lg-6 col-xl-8 text-center"></div>-->
+
+
+    <div class="navbar-header ">
+    <div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center"> 	
+    <a class="navbar-brand text" href="javascript:location.reload()">Geonoticias univalle</a>
+
+    </div>
+
+      
+    </div>
+    <ul class="nav navbar-nav">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg" href="quienes_somos.php" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         ¿Quienes somos?
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Misión</a>
+          <a class="dropdown-item" href="#">Visión</a>
+      </div>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg" href="quienes_somos.php" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Contáctenos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+          <a class="dropdown-item" href="#">Facebook</a>
+          <a class="dropdown-item" href="#">Instragram</a>
+          <a class="dropdown-item" href="#">Whatsapp</a>       
+      </div>
+      </li>
+      <li class="active"><a href="index.php?op=salir" class="btn btn-outline-danger btn-lg">Cerrar sesión</a></li>
+    </ul>
+
+  </div>
+  </div>
+</nav>
+<div class="row">	
+<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 text-center"> 	</div>
+<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3 text-center"> 	</div>
+<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3 text-center"> 	
+<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-lg" > 
+		<div id="informacion_sobre_ruta"></div>
+</div>
+
+
+
+</div>
+
+</body>
 
 
 
 	<!--  semana15 enlace para salir -->
 
-	<a href="index.php?op=salir">Salir del Aplicativo</a><br>
-	<?php 
-	  echo 'Este es rol del usuario logueado : '.$_SESSION["rol"];
-	  echo '<br>';
-	  echo 'Este es id del usuario logueado  : '.$_SESSION["iduser"];
-	  echo '<br>';
-	?>
+	<!--<?php 
+	//  echo 'Este es rol del usuario logueado : '.$_SESSION["rol"];
+	//  echo '<br>';
+	 // echo 'Este es id del usuario logueado  : '.$_SESSION["iduser"];
+	 // echo '<br>'; 
+	?>-->
 	
 
 
 	<!-- Boton Ruteo entre dos puntos -->
-	<br>
-	<input type="button" id="boton_ruteo" value="Calcula la Ruta m&aacute;s corta">
-	<br> 
-		<div id="informacion_sobre_ruta"></div>
-	<br>
+
 
 	<!-- FIN Boton Ruteo entre dos puntos -->
 	<div id="mapid" style="width: 800px; height: 600px; z-index:0;"></div>
@@ -182,33 +275,10 @@ else
 	wmsLayer.addTo(mymap);
 	
 	
-	var capamarcador = L.marker([3.44420 , -76.47892 ]).addTo(mymap).bindPopup("<b>Hola Clase</b><br />Esta es una ventana Emergente !!.").openPopup();
-	
-	var capacirculo = L.circle([3.41447,-76.54266], 500, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("Esto es un circulo !!.");
-	
-	
-	var capapoligono= L.polygon([
-		[3.45831,-76.51951],
-		[3.44462,-76.50662],
-		[3.4215,-76.5142]
-	]).addTo(mymap).bindPopup("Esto es un Poligono");
-	
-	
 	
 	
 	var groupedOverlays = {
-	  "Grupo1": {
-		"Capa Circulo": capacirculo,
-		"Capa Marcador":capamarcador
-	  },
-	  "Grupo2": {
-		"Capa Poligono": capapoligono
-	  }
-	  ,
+
 	  "Capas ideas": {
 		"Manzanas": wmsLayer
 	  }
@@ -433,7 +503,7 @@ else
 		layer.setStyle(estiloPoligonoEdificiosDefecto);		
 		console.log(feature.properties.name);
 		if (feature.properties && feature.properties.name) {
-			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>AREA: </b>' +feature.properties.localiza);
+			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>UBICACION: </b>' +feature.properties.localiza);
 			
 			layer.on('mouseover', function() 
 			{ 
@@ -883,6 +953,16 @@ function recuperarvias()
 	
 
 </script>
+
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="display-6 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 border text-center"><p>MODELAMIENTO DE DATOS SIG EN WEB 	<br><br> PROYECTO FINAL</p></div>
+		<div class="display-6 col-4 col-sm-4 col-md-8 col-lg-8 col-xl-4 borde2 text-center"><p>UNIVERSIDAD DEL VALLE <br>ESCUELA DE INGENIERÍA CIVIL Y GEOMÁTICA <br> INGENIERÍA TOPOGRÁFICA</p></div>
+		<div class="display-6 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 border text-center"><p>GeoNoticias <br> Santiago de Cali <br> 2020</p></div>
+
+	</div>
+</div>
 
 </body>
 </html>
