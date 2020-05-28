@@ -233,7 +233,7 @@ else
 		alert( "Click sobre el Mapa, indicando el punto Inicial" );
 	  	//Cambio de estado la vabriable bandera
 		flag_ruteo=true;
-	  	//Cambio el cursor del mouse sobre el mapa
+	  	//Cambio el cursor 	del mouse sobre el mapa
 	  	document.getElementById('mapid').style.cursor = 'crosshair';
 	});
 
@@ -432,7 +432,7 @@ else
 		layer.setStyle(estiloPoligonoEdificiosDefecto);		
 		console.log(feature.properties.name);
 		if (feature.properties && feature.properties.name) {
-			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>ID: </b>' +feature.properties.osm_id +'<br><b>AREA: </b>' +feature.properties.area_edif );
+			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>AREA: </b>' +feature.properties.localiza);
 			
 			layer.on('mouseover', function() 
 			{ 
@@ -457,9 +457,8 @@ else
 		if (feature.properties && feature.properties.name) 
 		{
 			var mensaje = '<b>NOMBRE: </b> '+feature.properties.name;
-			mensaje +='<br><b>ID: </b>' + feature.properties.osm_id;
-			mensaje +='<br><b>TIPO: </b>' +feature.properties.type;
-
+			mensaje +='<br><b>ID: </b>' + feature.properties.tipo;
+			mensaje +='<br><b>TIPO: </b>' +feature.properties.localizaci;
 			layer.bindPopup(mensaje);
 		}
 	}
@@ -661,14 +660,13 @@ else
 		var opcion_ = $('#opciones_form').val();
 		var descripcion_ = $('#descrip_form').val();
 		var usuario_= "<?php echo $_SESSION["iduser"];?>";
-		var foto_=$('#foto_form').val();
 
 
 		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
 		$.post("src/funciones.php",
 			{
 				peticion: 'registro-desde-ventana-modal', 
-				parametros: {  x:cx_ ,  y: cy_,  tipo: opcion_ , descripcion: descripcion_, usuario : usuario_, foto : foto_}
+				parametros: {  x:cx_ ,  y: cy_,  tipo: opcion_ , descripcion: descripcion_, usuario : usuario_}
 			},
 			function(data, status){
 				console.log("Datos recibidos: " + data + "\nStatus: " + status);
@@ -700,7 +698,6 @@ else
 		//Limpio los campos del formulario
 		$('#opciones_form').val("");
 		$('#descripcion_form').val("");
-		$('#foto_form').val("")
 		$('#div_mensaje_ventana_reporte').html("");
 
 		// lanzo ventana modal para registrar datos de reporte

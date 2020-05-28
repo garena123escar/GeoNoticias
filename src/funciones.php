@@ -28,7 +28,7 @@
 			 FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
 			 FROM (SELECT 'Feature' As type
 				, ST_AsGeoJSON(lg.geom)::json As geometry
-				, row_to_json((SELECT l FROM (SELECT id ,nombre,localizaci,tipo) As l
+				, row_to_json((SELECT l FROM (SELECT name,localizaci,tipo) As l
 				  )) As properties
 			   FROM fuerza_publica As lg  where ST_IsValid(geom) ) As f )  As fc;";
    
@@ -148,11 +148,11 @@
 			$ptipo = $parametros['tipo'];
 			$pdescripcion = $parametros['descripcion'];
 			$usuario= $parametros['usuario'];
-			$foto=$parametros['foto'];
 
 
 
-			$sql = "INSERT INTO reporte(x,y,tipo,descripcion,fecha_registro,id_usuario, foto)VALUES($px,$py,'$ptipo','$pdescripcion',now(),'$usuario', '$foto');";
+
+			$sql = "INSERT INTO reporte(x,y,tipo,descripcion,fecha_registro,id_usuario)VALUES($px,$py,'$ptipo','$pdescripcion',now(),'$usuario');";
 			$query = pg_query($dbcon,$sql);
 
 			if($query)
