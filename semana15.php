@@ -182,36 +182,13 @@ else
 	wmsLayer.addTo(mymap);
 	
 	
-	var capamarcador = L.marker([3.44420 , -76.47892 ]).addTo(mymap).bindPopup("<b>Hola Clase</b><br />Esta es una ventana Emergente !!.").openPopup();
-	
-	var capacirculo = L.circle([3.41447,-76.54266], 500, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(mymap).bindPopup("Esto es un circulo !!.");
-	
-	
-	var capapoligono= L.polygon([
-		[3.45831,-76.51951],
-		[3.44462,-76.50662],
-		[3.4215,-76.5142]
-	]).addTo(mymap).bindPopup("Esto es un Poligono");
-	
-	
 	
 	
 	var groupedOverlays = {
-	  "Grupo1": {
-		"Capa Circulo": capacirculo,
-		"Capa Marcador":capamarcador
-	  },
-	  "Grupo2": {
-		"Capa Poligono": capapoligono
-	  }
-	  ,
-	  "Capas ideas": {
+	
+	  "Capas idecs": {
 		"Manzanas": wmsLayer
-	  }
+	  },
 	};
 
 
@@ -296,7 +273,7 @@ else
 		//Recupero los edificios desde la base de datos		
 		cargarEdificios();
 		//hago zoom hacia univalle
-		//mymap.flyTo([3.372472, -76.533229], 16);
+		mymap.flyTo([3.372472, -76.533229], 16);
 	}).addTo( mymap );
 
 
@@ -314,7 +291,7 @@ else
 	var flag_otro=false;
 	L.easyButton('<img src="images/icono4.png" width="20px">', function(btn, map)
 	{
-		recuperarvias();
+		//recuperarvias();
 		//document.getElementById('mapid').style.cursor = 'crosshair';
                 //flag_otro=true;
 		//mymap.flyTo([3.372472, -76.533229], 16);
@@ -433,7 +410,7 @@ else
 		layer.setStyle(estiloPoligonoEdificiosDefecto);		
 		console.log(feature.properties.name);
 		if (feature.properties && feature.properties.name) {
-			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>AREA: </b>' +feature.properties.localiza);
+			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>UBICACION: </b>' +feature.properties.localiza);
 			
 			layer.on('mouseover', function() 
 			{ 
@@ -450,10 +427,10 @@ else
 	}
 	
 
-	//Para cada edificio
+	//Para cada reporte
 	function onEachFeatureSitiosInteres(feature, layer) 
 	{
-		//Asigno estilo a cada edificio		
+		//Asigno estilo a cada reporte		
 		console.log(feature.properties.name);
 		if (feature.properties && feature.properties.name) 
 		{
@@ -699,8 +676,8 @@ else
 		console.log(feature.properties.barrio);
 		if (feature.properties && feature.properties.barrio) 
 		{
-			var mensaje ='<br><b>ID: </b>' +feature.properties.id_reporte;
-			mensaje +='<b>Barrio: </b> '+feature.properties.barrio;
+			var mensaje ='<b><b>ID: </b>' +feature.properties.id_reporte;
+			mensaje +='<br><b>Barrio: </b> '+feature.properties.barrio;
 			mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
 			mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
 			
