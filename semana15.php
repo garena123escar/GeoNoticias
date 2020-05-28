@@ -19,7 +19,7 @@ else
 <html>
 <head>
 	
-	<title>Semana15 - Leaflet </title>
+	<title>Proyecto</title>
 	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
 	<script src="lib/leaflet/leaflet.js"></script>
 	
