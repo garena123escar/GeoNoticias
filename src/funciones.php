@@ -1,6 +1,6 @@
 <?php 
 
-  //configuracion de la conexion a la base de datos x2
+  //configuracion de la conexion a la base de datos
 
    include('configuracion.php');
    
