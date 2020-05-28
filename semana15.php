@@ -432,7 +432,7 @@ else
 		layer.setStyle(estiloPoligonoEdificiosDefecto);		
 		console.log(feature.properties.name);
 		if (feature.properties && feature.properties.name) {
-			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>ID: </b>' +feature.properties.osm_id +'<br><b>AREA: </b>' +feature.properties.area_edif );
+			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>AREA: </b>' +feature.properties.localiza);
 			
 			layer.on('mouseover', function() 
 			{ 
