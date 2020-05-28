@@ -135,7 +135,7 @@
 					$sql="SELECT row_to_json(fc)
 					FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
 					FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json
-					((SELECT l FROM (SELECT  lg.barrio  ) As l)) As properties
+					((SELECT l FROM (SELECT  lg.barrio, lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
 					FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , b.barrio, r.tipo, r.descripcion, r.id_reporte FROM
 			   barrios as b, reporte as r
 			   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), b.geom )
