@@ -1,4 +1,4 @@
-	<?php
+<?php
   
   //Una forma facil de validar que la pagina se abrio desde la pagina anterior y si esta logueado en el sistema
   if( ($_GET['logueado']=='si') AND isset($_SERVER['HTTP_REFERER']))
