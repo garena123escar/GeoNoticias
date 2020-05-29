@@ -234,6 +234,31 @@ else
 		  <div id="div_mensaje_ventana_reporte"></div>
 	</div>
 
+	<div id="ventana-consulta2" class="modal">
+		<div class="modal-header">
+		<h3 class="modal-title" id="myModalLabel">Consultar noticias subidas por un usuario</h3>
+
+           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+		<form enctype="multipart/form-data">
+			
+			<label for="opciones_form3">Seleccione el usuario a consultar:</label><br>
+			<select id="opciones_form3" name="opciones_form3">
+			<option value="1">Esteban</option>
+			<option value="2">DanielEsc</option>
+			<option value="3">terry</option>
+			<option value="4">Bloqueos</option>
+			<option value="5">Incendios</option>
+			<option value="29">tito</option>
+			</select>
+			<br>
+			
+			<input type="button" id="boton-envio-consulta2" value="Consultar">
+		  </form>
+		  <div id="div_mensaje_ventana_consulta2´"></div>
+	</div>
+
 <body>
 
    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -288,7 +313,7 @@ else
 <input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > 
 <input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	
 <input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
-<input  id="mapa_reporte2" value="ver reportes"class="btn btn-danger bt-sm" >
+<input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" >
 
 	<br>	<br>	
 <h3> Herramientas </h3>
@@ -485,12 +510,14 @@ else
 		$( "#mapa_reporte2" ).click(function() 
 	{
 	  	//vuelo hacia univalle
-	  	var flag_reporte2=true;
+	  	
 
 	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación se mostrarán los reportes:" );
+		alert( "A continuación Eliga el usuario a consultar" );
 	  	//Cambio de estado la vabriable bandera
-	  	cargarreporte();
+	  	var flag_reporte2=true;
+		  lanzarVentanaconsulta2();
+
 
 		//mymap.flyTo([3.372472, -76.533229], 16);
 
@@ -530,6 +557,10 @@ else
 		{
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 		lanzarVentanaconsulta();
+		}
+		else(flag_reporte2)
+		{
+		lanzarVentanaconsulta2(e);
 		}
 
 
@@ -826,7 +857,8 @@ else
 	var capaGeojsonvias = L.geoJson();
 	var geojsonFeaturevia;
 	
-
+	
+	var geojsonFeatureconsulta2;
 
 
 	var capaGeojsonRuta = L.geoJson();
@@ -1111,6 +1143,89 @@ $("#boton-envio-consulta").click(function()
 			});
 	}
 
+	 //CONSULTA 2
+	
+	 function onEachFeatureconsulta2(feature, layer) 
+        {
+                
+            console.log(feature.properties.usuario);
+            if (feature.properties && feature.properties.usuario) 
+            {
+                var mensaje ='<b><b>ID: </b>' +feature.properties.id_reporte;
+                mensaje +='<br><b>USUARIO: </b> '+feature.properties.usuario;
+                mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
+                mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
+                
+    
+                layer.bindPopup(mensaje);
+            }
+        }	
+    
+    
+    $("#boton-envio-consulta2").click(function() 
+        {
+            console.log('Enviar formulario y cerrar ventana modal');
+            //capturar los datos del formulario
+    
+            var user_= $('#opciones_form3').val();
+        
+    
+            //Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
+            $.post("src/funciones.php",
+                {
+                    peticion: 'consulta2', 
+                    parametros: { user:user_ }
+                },
+                function(data, status)
+				{
+                    console.log("Datos recibidos: " + data + "\nStatus: " + status);
+                    if(status=='success')
+                    {
+                        //console.log(data);
+                        //mymap.removeLayer(capaGeojsonconsulta2); 
+                        geojsonFeatureconsulta2= eval('('+data+')');
+                        
+    
+                        capaGeojsonconsulta2 = L.geoJson(geojsonFeatureconsulta2,
+                        {
+                            pointToLayer: function (feature, latlng) 
+                            {
+                                //Icons from https://mapicons.mapsmarker.com/
+                                var smallIcon = L.icon(
+                                {
+                                iconSize: [27, 27],
+                                iconAnchor: [13, 27],
+                                popupAnchor:  [1, -24],
+                                iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
+                            	});
+                            
+                                return L.marker(latlng, {icon: smallIcon}); 
+                            },onEachFeature: onEachFeatureconsulta2
+                            
+                        } ).addTo(mymap);
+    
+                    }
+                });	
+            //Para cerrar la ventana modal	
+            $.modal.close();
+        });
+    
+    
+        function lanzarVentanaconsulta2(e)
+        {
+        
+            //Limpio los campos del formulario
+            $('#opciones_form3').val("");
+            $('#div_mensaje_ventana_consulta2').html("");
+    
+            // lanzo ventana modal para consulta
+            $('#ventana-consulta2').modal(
+                {
+                    closeExisting: false,
+                    escapeClose: true,
+                      clickClose: true,
+                });
+        }
 
 
     //funcion mapa de calor Semana15

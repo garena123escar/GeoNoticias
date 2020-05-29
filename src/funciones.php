@@ -248,7 +248,25 @@
 				}
 				break;
 		}
-
+		//CASO Consulta para visualizar	
+		case 'consulta2':
+			{
+				$user = $parametros ['user'];
+				$sql3="SELECT row_to_json(fc)
+				FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
+				FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json
+				((SELECT l FROM (SELECT  lg.usuario lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
+				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , u.usuario, r.tipo, r.descripcion, r.id_reporte, u.id_usuario FROM
+		   usuarios as u, reporte as r
+		   WHERE u.id_usuario = r.id_usuario and r.id_usuario = '$user'
+		   ) As lg   
+		   ) As f )  As fc;";
+	   
+				$query3 = pg_query($dbcon,$sql3);
+				$row = pg_fetch_row($query3);
+				echo $row[0];
+				break;
+			}
 		//CASO Semana15 - Mapa de Calor
 		case 'recupera-geojson-mapacalor':
 			{
@@ -286,7 +304,7 @@
 				echo $row[0];
 				break;
 		}	
-		
+	
    }
     
 
