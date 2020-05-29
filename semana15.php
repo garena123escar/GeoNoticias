@@ -1,4 +1,4 @@
-<?php
+	<?php
   
   //Una forma facil de validar que la pagina se abrio desde la pagina anterior y si esta logueado en el sistema
   if( ($_GET['logueado']=='si') AND isset($_SERVER['HTTP_REFERER']))
@@ -101,66 +101,7 @@ else
 	
 </head>
 <body>
-<!--prueba_1-->
-<!-- modal -->
 
-<div class="container-fluid">
-<div id="fsModal"
-     class="modal animated bounceIn modal-lg modal-sm"
-     tabindex="-1"
-     role="dialog"
-     aria-labelledby="myModalLabel"
-     aria-hidden="true">
-
-  <!-- dialog -->
-  <div class="modal-dialog">
-
-    <!-- content -->
-    <div class="modal-content">
-
-      <!-- header -->
-      <div class="modal-header">
-        <h1 id="myModalLabel"
-            class="modal-title">
-          ¿Quienes somos?
-        </h1>
-      </div>
-      <!-- header -->
-      
-      <!-- body -->
-      <div class="modal-body text-justify">
-        <h2>Misión</h2>
-
-        <p>Debido a la creciente necesidad de espacializar la información de último minuto se hace necesario  la creación de herramientas de tipo espacial que permitar realizar dicha acción, teniendo en cuenta  qué según información oficial, la ciudad de Santiago de Cali, es una de las ciudades más peligrosas del país. Sin embargo, la función de este sistema, no es netamente el reporte de la inseguridad, o casos de violencia. Es un sistema innovador que pretende dar conocimiento a la ciudadania sobre las acciones de caracter noticioso que ocurren día a día en la ciudad. Dando así alcance a la ciudadania sobre las acciones que ocurren en su entorno espacial.</p>
-
-      <h2>Visión</h2>
-
-        <p>En los próximos años, posicionarse como un medio de comunicación alimentado además, creado por y para los usuarios Caleños. <br> <br><br>
-	Ser el primer medio de reporte continúo entre autoridades y comunidad. Teniendo en cuenta, qué, no solo se podrán reportar hechos delictivos, sino, manifestaciones, atascos, eventos de gran magnitud, entre otros.
-</p>
-
-      </div>
-      <!-- body -->
-
-      <!-- footer -->
-      <div class="modal-footer">
-        <button class="btn btn-secondary"
-                data-dismiss="modal">
-          close
-        </button>
-      </div>
-      <!-- footer -->
-
-    </div>
-    <!-- content -->
-
-  </div>
-  <!-- dialog -->
-
-</div>
-</div>
-<!-- modal -->
-<!-- fin prueba_1-->
 	<!-- Contenido HTML de la Ventana Modal -->
 <!--	<div id="ex1" class="modal">
 		<p>Hola este contenido del ejemplo 1 de una ventana modal</p>
@@ -223,6 +164,38 @@ else
 		  <div id="div_mensaje_ventana_consulta´"></div>
 	</div>
 
+<!--ventana modal mision-->
+
+<!-- Modal -->
+<div class="modal fade modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">¿Quienes somos?</h1>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3>Visión</h3> <p>
+        	<h5 class="display-6 text-justify"> En los próximos años, posicionarse como un medio de comunicación alimentado además, creado por y para los usuarios Caleños. <br> <br><br>
+	Ser el primer medio de reporte continúo entre autoridades y comunidad. Teniendo en cuenta, qué, no solo se podrán reportar hechos delictivos, sino, manifestaciones, atascos, eventos de gran magnitud, entre otros.
+	</h5>	</p>
+	        <h3>Misión</h3> <p>
+        	<h5 class="display-6 text-justify"> <br>Debido a la creciente necesidad de espacializar la información de último minuto se hace necesario  la creación de herramientas de tipo espacial que permitar realizar dicha acción, teniendo en cuenta  qué según información oficial, la ciudad de Santiago de Cali, es una de las ciudades más peligrosas del país.
+        	<br>	<br>	 Sin embargo, la función de este sistema, no es netamente el reporte de la inseguridad, o casos de violencia. Es un sistema innovador que pretende dar conocimiento a la ciudadania sobre las acciones de caracter noticioso que ocurren día a día en la ciudad. Dando así alcance a la ciudadania sobre las acciones que ocurren en su entorno espacial.</h3>
+	</h5>	</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--ventana modal mision-->
+
 	<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
 	<div id="ventana-reporte" class="modal">
 		<div class="modal-header">
@@ -277,21 +250,20 @@ else
 
     <div class="navbar-header ">
     <div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center"> 	
-    <a class="navbar-brand text" href="javascript:location.reload()"><h2>Geonoticias univalle</h2></a>
+    <a class="navbar-brand text" href="javascript:location.reload()">Geonoticias univalle</a>
 
     </div>
 
       
     </div>
+   
+
     <ul class="nav navbar-nav">
+ <li class="active"><a href="#ventana-vision" class=" nav-link btn btn-outline-danger btn-lg" data-toggle="modal" data-target="#exampleModal" aria-haspopup="true" aria-expanded="false">¿Quienes sómos?</a></li>
 
-
-        <li class="active"><a class="  btn btn-outline-danger btn-lg"  data-toggle="modal" aria-haspopup="true" 
-        data-target="#fsModal"  > <h5>¿Quienes somos?</h5></a></li>
-
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
-         <h5>Contáctenos</h5>
+        <li class="nav-item dropdown nav navbar-nav">
+        <a class="nav-link dropdown-toggle btn btn-outline-danger btn-lg"  id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Contáctenos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
           <a class="dropdown-item" href="https://www.facebook.com/esteban8atorres">Facebook</a>
@@ -299,26 +271,36 @@ else
           <a class="dropdown-item" href="https://www.webwhatsapp.com">Whatsapp</a>       
       </div>
       </li>
-      <li class="active"><a href="index.php?op=salir" class="btn btn-outline-danger btn-lg"><h5>Cerrar sesión</h5></a></li>
- 
+      <li class="active"><a id="boton_quienes_somos" href="index.php?op=salir" class="btn btn-outline-danger btn-lg">Cerrar sesión</a></li>
     </ul>
 
   </div>
   </div>
 </nav>
 <div class="row">	
-<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 text-center"> 
+<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-1 col-xl-2 text-center"> 
 </div>
-<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7"> 	
+<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7	text-center"> 	
 	<div id="mapid" style="width: 860px; height: 580px; z-index:0;"></div>
 	<div id="mensaje_que_cambia"></div>	</div>
-<div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-4 text-center">  <br>	
-<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-lg" > 
-		<div id="informacion_sobre_ruta"></div><br>
+<div class="container-fluid">	
+<div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 text-center">  <br>	
+<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > 
+<input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	
+<input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
+<input  id="mapa_reporte2" value="ver reportes"class="btn btn-danger bt-sm" >
 
-<input id="boton_reportes" value="Crear reporte"class="btn btn-danger bt-lg" > <br><br>
+	<br>	<br>	
+<h3> Herramientas </h3>
+<input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" >
+<input  id="mapa_cluster" value="Cluster"class="btn border-warning" >
 
-<input id="boton_consulta_1" value="Reporte por comuna"class="btn btn-danger bt-lg" >
+
+
+
+</div>
+
+
 
 </div>
 
@@ -427,41 +409,102 @@ else
 	  	//Cambio el cursor 	del mouse sobre el mapa
 	  	document.getElementById('mapid').style.cursor = 'crosshair';
 	});
+//Creo una variable booleana (bandera) para saber cuando se requiere el ruteo 
+	var flag_reporte=false;
 
-	var consulta=false;
-
-	//Evento click para boton_reporte
-	$( "#boton_reportes" ).click(function() 
+	//Evento tipo de noticia por comuna
+	$( "#boton_reporte" ).click(function() 
 	{
 	  	//vuelo hacia univalle
-		//mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "Marque el sitio del evento" );
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "Ingrese el tipo de reporte y la comuna: " );
 	  	//Cambio de estado la vabriable bandera
-		consulta=true;
+		flag_reporte=true;
 	  	//Cambio el cursor 	del mouse sobre el mapa
-	  	document.getElementById('mapid').style.cursor = 'crosshair';
-	});
+	  	lanzarVentanaconsulta();
 
-	var consulta_1=false;
-
-	//Evento click para boton_reporte
-	$( "#boton_consulta_1" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-		//mymap.flyTo([3.372472, -76.533229], 16);
-		alert("Seleccione la comuna y el tipo de Noticia o evento");
-	  	//Cambio de estado la vabriable bandera
-		consulta_1=true;
-
-		lanzarVentanaconsulta();
-	  	//Cambio el cursor 	del mouse sobre el mapa
-	  	//document.getElementById('mapid').style.cursor = 'crosshair';
 	});
 
 
+	var flag_registrar=false;
+
+
+		$( "#boton_reporte_cliente" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "A continuación marque el sitio de reporte:" );
+	  	//Cambio de estado la vabriable bandera
+		document.getElementById('mapid').style.cursor = 'crosshair';
+		flag_registrar=true;
+		lanzarVentanaRegistro(e);
+
+		//mymap.flyTo([3.372472, -76.533229], 16);
+	});
+		
 	
+
+	var flag_calor=false;
+
+
+		$( "#mapa_calor" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	  	var flag_calor=false;
+
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "A continuación se muestra el mapa de calor:" );
+	  	//Cambio de estado la vabriable bandera
+	  	mapaCalor();
+
+		//mymap.flyTo([3.372472, -76.533229], 16);
+
+	});
+		
+
+	var flag_cluster=false;
+
+
+		$( "#mapa_cluster" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	  	var flag_clustter=false;
+
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "A continuación se muestra el cluster de noticias:" );
+	  	//Cambio de estado la vabriable bandera
+	  	cargarCluster();
+
+		//mymap.flyTo([3.372472, -76.533229], 16);
+
+	});
+	
+		var flag_reporte2=false;
+
+
+		$( "#mapa_reporte2" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	  	var flag_reporte2=true;
+
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "A continuación se mostrarán los reportes:" );
+	  	//Cambio de estado la vabriable bandera
+	  	cargarreporte();
+
+		//mymap.flyTo([3.372472, -76.533229], 16);
+
+	});
+
+
 	
 	var popup = L.popup();
+
+
+	//Boton Ejemplo para mostrar evento click sobre el mapa
+
+    //Semana 13
+	//Boton Ejemplo para registrar 
 
 	function onMapClick(e) {
 		//Clase 10 - Comentar evento click y retorno de coordenadas
@@ -475,22 +518,22 @@ else
 		{
 			rutaMasCortaEntreDosPuntos(e);
 		}
-	 else 
-		if(flag_otro){
-			funcionNueva();
-		}
-	else
-		if(consulta)
+		else
+		if(flag_registrar)
 		{
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 			lanzarVentanaRegistro(e);
-		}
+		}	
+	
 	else
-		if(consulta_1)
+		if(flag_reporte)
 		{
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 		lanzarVentanaconsulta();
 		}
+
+
+
 	}
 
 	function funcionNueva(){
@@ -509,65 +552,25 @@ else
 	
 	var helloPopup = L.popup().setContent('Mensaje desde boton');
 
-	L.easyButton('<img src="images/smile.png">', function(btn, map)
-	{
-		//var coordenadas = [3.483820,-76.509149];
-		//map.setView(coordenadas);
-		lanzarVentanaconsulta();
-		//helloPopup.setLatLng(coordenadas).openOn(map);
-	}).addTo( mymap );
-
-	L.easyButton('<img src="images/icono1.png" width="20px">', function(btn, map)
-	{
-		//Recupero los edificios desde la base de datos		
-		cargarEdificios();
-		//hago zoom hacia univalle
-		mymap.flyTo([3.372472, -76.533229], 16);
-	}).addTo( mymap );
+	
 
 
-	L.easyButton('<img src="images/icono2.png" width="20px">', function(btn, map)
-	{
-		//Recupero los sitios de interes desde la base de datos		
-		cargarreporte();
-		//hago zoom hacia univalle
-		//mymap.flyTo([3.372472, -76.533229], 16);
-	}).addTo( mymap );
+
+
 
 
 
 	//Boton Ejemplo para mostrar evento click sobre el mapa
-	var flag_otro=false;
-	L.easyButton('<img src="images/icono4.png" width="20px">', function(btn, map)
-	{
-		//recuperarvias();
-		//document.getElementById('mapid').style.cursor = 'crosshair';
-                //flag_otro=true;
-		//mymap.flyTo([3.372472, -76.533229], 16);
-	}).addTo( mymap );
+
 
     //Semana 13
 	//Boton Ejemplo para registrar 
-	var flag_registrar=false;
-	L.easyButton('<img src="images/punto_inicio.png" width="20px">', function(btn, map)
-	{
-		document.getElementById('mapid').style.cursor = 'crosshair';
-		flag_registrar=true;
-		//mymap.flyTo([3.372472, -76.533229], 16);
-	}).addTo( mymap );
+
 
 
 	//Semana 15  --  Boton Para Mapa de Calor
-	L.easyButton('<img src="images/punto_final.png" width="20px">', function(btn, map)
-	{
-		mapaCalor();
-	}).addTo( mymap );
 
-	//Semana 15  --  Boton Para Mapa de Cluster
-	L.easyButton('<img src="images/icono_op1.png" width="20px">', function(btn, map)
-	{
-		cargarCluster();
-	}).addTo( mymap );
+	
 
 
 
@@ -1019,6 +1022,8 @@ function recuperarvias()
   				clickClose: true,
 			});
 	}
+
+
 //CONSULTA 1
 
 //icono para cada reporte
@@ -1125,7 +1130,7 @@ $("#boton-envio-consulta").click(function()
 						function onEachFeature(feature, layer) 
 						{
 							//var alea=Math.floor((Math.random() * 100) + 1);
-							arrayPoints+='['+feature.geometry.coordinates[1]+','+feature.geometry.coordinates[0]+',"'+feature.properties.valor+'"],';	
+							arrayPoints+='['+feature.geometry.coordinates[1]+','+feature.geometry.coordinates[0]+',"15"],';	
 						} 
 					});
 					var y=arrayPoints.substring(0, arrayPoints.length - 1);
@@ -1142,10 +1147,9 @@ $("#boton-envio-consulta").click(function()
 		if (feature.properties) 
 		{	
 		    var mensaje="Barrio: <b>"+feature.properties.barrio+"</b><br>";
-		    mensaje+="Comuna: "+feature.properties.comuna+"<br>";
-		    mensaje+="Estrato: "+feature.properties.estra_moda+"<br>";
-		    mensaje+="Valor: "+feature.properties.valor+"<br>";
-		    mensaje+="Opcion Registrada: "+feature.properties.opcion_registrada+"<br>";			
+		    mensaje+="Tipo: "+feature.properties.tipo+"<br>";
+		    mensaje+="descripcion: "+feature.properties.descripcion+"<br>";
+		    mensaje+="ID: "+feature.properties.id_reporte+"<br>";		
 		    layer.bindPopup(''+mensaje+'');
 		}
 	}
@@ -1177,7 +1181,7 @@ $("#boton-envio-consulta").click(function()
 							  iconSize: [27, 27],
 							  iconAnchor: [13, 27],
 							  popupAnchor:  [1, -24],
-							  iconUrl: 'images/icono_'+feature.properties.opcion_registrada+'.png' 
+							  iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
 						        });
 						
 							return L.marker(latlng, {icon: smallIcon}); 
@@ -1203,15 +1207,14 @@ $("#boton-envio-consulta").click(function()
 //Función para actualizar cada 25 segundos(4000 milisegundos)
   setInterval("actualizar()",60000000);
 </script>
-<!--<div class="container-fluid">
+<div class="container-fluid">
 <br>	
 	<div class="row">
 		<div class="display-6 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 border text-center"><p>MODELAMIENTO DE DATOS SIG EN WEB 	<br><br> PROYECTO FINAL</p></div>
 		<div class="display-6 col-4 col-sm-4 col-md-8 col-lg-8 col-xl-4 borde2 text-center"><p>UNIVERSIDAD DEL VALLE <br>ESCUELA DE INGENIERÍA CIVIL Y GEOMÁTICA <br> INGENIERÍA TOPOGRÁFICA</p></div>
 		<div class="display-6 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-4 border text-center"><p>GeoNoticias <br> Santiago de Cali <br> 2020</p></div>
 
-	</div>-->
-
+	</div>
 
 </body>
 </html>
