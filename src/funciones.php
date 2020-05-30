@@ -208,11 +208,14 @@
 			$ptipo = $parametros['tipo'];
 			$pdescripcion = $parametros['descripcion'];
 			$usuario= $parametros['usuario'];
+			$nombre=$parametros['nombres'];
 
 
 
 
-			$sql = "INSERT INTO reporte(x,y,tipo,descripcion,fecha_registro,id_usuario)VALUES($px,$py,'$ptipo','$pdescripcion',now(),'$usuario');";
+
+
+			$sql = "INSERT INTO reporte(x,y,tipo,descripcion,fecha_registro,id_usuario,usuario)VALUES($px,$py,'$ptipo','$pdescripcion',now(),'$usuario','$nombre');";
 			$query = pg_query($dbcon,$sql);
 
 			if($query)
@@ -240,6 +243,7 @@
 				if($row>1)
 				{
 					echo "ENTRAR";
+					$_SESSION["usuario"] = $row[0];
 					$_SESSION["rol"] = $row[2];
 					$_SESSION["iduser"] = $row[3];
 				}else
@@ -251,22 +255,24 @@
 		//CASO Consulta para visualizar	
 		case 'consulta2':
 			{
-				$user = $parametros ['user'];
-				$sql3="SELECT row_to_json(fc)
+				$user= $parametros['user'];
+
+				$sql="SELECT row_to_json(fc)
 				FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
 				FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json
-				((SELECT l FROM (SELECT  lg.usuario lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
-				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , u.usuario, r.tipo, r.descripcion, r.id_reporte, u.id_usuario FROM
-		   usuarios as u, reporte as r
-		   WHERE u.id_usuario = r.id_usuario and r.id_usuario = '$user'
+				((SELECT l FROM (SELECT  lg.comuna, lg.tipo, lg.descripcion, lg.id_reporte, lg.usuario  ) As l)) As properties
+				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , c.comuna, r.tipo, r.descripcion, r.id_reporte,r.usuario, r.id_usuario FROM
+		   comuna as c, reporte as r
+		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), c.geom ) and r.id_usuario ='$user'
 		   ) As lg   
 		   ) As f )  As fc;";
-	   
-				$query3 = pg_query($dbcon,$sql3);
-				$row = pg_fetch_row($query3);
-				echo $row[0];
-				break;
+				  
+				  $query3 = pg_query($dbcon,$sql);
+				  $row = pg_fetch_row($query3);
+				  echo $row[0];
+			  break;
 			}
+
 		//CASO Semana15 - Mapa de Calor
 		case 'recupera-geojson-mapacalor':
 			{

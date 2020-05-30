@@ -244,13 +244,13 @@ else
 		<form enctype="multipart/form-data">
 			
 			<label for="opciones_form3">Seleccione el usuario a consultar:</label><br>
-			<select id="opciones_form3" name="opciones_form3">
+			<select id="opciones_form3" name="opciones_form3" type="number">
 			<option value="1">Esteban</option>
 			<option value="2">DanielEsc</option>
 			<option value="3">terry</option>
 			<option value="4">Bloqueos</option>
 			<option value="5">Incendios</option>
-			<option value="29">tito</option>
+			<option value="31">pepi</option>
 			</select>
 			<br>
 			
@@ -340,11 +340,8 @@ else
 
 	<!--  semana15 enlace para salir -->
 
-	<!--<?php 
-	//  echo 'Este es rol del usuario logueado : '.$_SESSION["rol"];
-	//  echo '<br>';
-	 // echo 'Este es id del usuario logueado  : '.$_SESSION["iduser"];
-	 // echo '<br>'; 
+<!--	<?php 
+e
 	?>-->
 	
 
@@ -558,10 +555,7 @@ else
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 		lanzarVentanaconsulta();
 		}
-		else(flag_reporte2)
-		{
-		lanzarVentanaconsulta2(e);
-		}
+	
 
 
 
@@ -1006,13 +1000,15 @@ function recuperarvias()
 		var opcion_ = $('#opciones_form').val();
 		var descripcion_ = $('#descrip_form').val();
 		var usuario_= "<?php echo $_SESSION["iduser"];?>";
+		var usuario_1= "<?php echo $_SESSION["usuario"];?>";
+
 
 
 		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
 		$.post("src/funciones.php",
 			{
 				peticion: 'registro-desde-ventana-modal', 
-				parametros: {  x:cx_ ,  y: cy_,  tipo: opcion_ , descripcion: descripcion_, usuario : usuario_}
+				parametros: {  x:cx_ ,  y: cy_,  tipo: opcion_ , descripcion: descripcion_, usuario : usuario_,nombres:usuario_1}
 			},
 			function(data, status){
 				console.log("Datos recibidos: " + data + "\nStatus: " + status);
@@ -1145,40 +1141,39 @@ $("#boton-envio-consulta").click(function()
 
 	 //CONSULTA 2
 	
-	 function onEachFeatureconsulta2(feature, layer) 
-        {
-                
-            console.log(feature.properties.usuario);
-            if (feature.properties && feature.properties.usuario) 
-            {
-                var mensaje ='<b><b>ID: </b>' +feature.properties.id_reporte;
-                mensaje +='<br><b>USUARIO: </b> '+feature.properties.usuario;
-                mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
-                mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
-                
-    
-                layer.bindPopup(mensaje);
-            }
-        }	
+function onEachFeatureconsulta2(feature, layer) 
+	{
+			
+		console.log(feature.properties.comuna);
+		if (feature.properties && feature.properties.comuna) 
+		{
+			var mensaje ='<b><b>ID reporte: </b>' +feature.properties.id_reporte;
+			mensaje +='<br><b>Comuna: </b> '+feature.properties.comuna;
+			mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
+			mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
+			mensaje +='<br><b>usuario: </b>' +feature.properties.usuario;
+
+			
+
+			layer.bindPopup(mensaje);
+		}
+    }		
     
     
     $("#boton-envio-consulta2").click(function() 
-        {
-            console.log('Enviar formulario y cerrar ventana modal');
-            //capturar los datos del formulario
-    
+        {    
             var user_= $('#opciones_form3').val();
-        
-    
+
             //Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
             $.post("src/funciones.php",
                 {
                     peticion: 'consulta2', 
-                    parametros: { user:user_ }
+                    parametros: { user: user_ }
                 },
+
                 function(data, status)
 				{
-                    console.log("Datos recibidos: " + data + "\nStatus: " + status);
+                    console.log("Datos recibidos: " + user_ + "\nStatus: " + status);
                     if(status=='success')
                     {
                         //console.log(data);
