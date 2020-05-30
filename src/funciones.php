@@ -263,7 +263,7 @@
 				((SELECT l FROM (SELECT  lg.comuna, lg.tipo, lg.descripcion, lg.id_reporte, lg.usuario  ) As l)) As properties
 				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , c.comuna, r.tipo, r.descripcion, r.id_reporte,r.usuario, r.id_usuario FROM
 		   comuna as c, reporte as r
-		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), c.geom ) and r.id_usuario ='$user'
+		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), c.geom ) and r.usuario ='$user'
 		   ) As lg   
 		   ) As f )  As fc;";
 				  

@@ -234,28 +234,18 @@ else
 		  <div id="div_mensaje_ventana_reporte"></div>
 	</div>
 
-	<div id="ventana-consulta2" class="modal">
+	<div id="ventana-consulta2" class="modal modal-sm">
 		<div class="modal-header">
-		<h3 class="modal-title" id="myModalLabel">Consultar noticias subidas por un usuario</h3>
+		<h3 class="modal-title" id="myModalLabel">Noticias por usuario: </h3>
 
-           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+           <button type="button" class="close " data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
         </button>
       </div>
-		<form enctype="multipart/form-data">
-			
-			<label for="opciones_form3">Seleccione el usuario a consultar:</label><br>
-			<select id="opciones_form3" name="opciones_form3" type="number">
-			<option value="1">Esteban</option>
-			<option value="2">DanielEsc</option>
-			<option value="3">terry</option>
-			<option value="4">Bloqueos</option>
-			<option value="5">Incendios</option>
-			<option value="31">pepi</option>
-			</select>
-			<br>
-			
-			<input type="button" id="boton-envio-consulta2" value="Consultar">
-		  </form>
+      <label for="descrip_form">Buscar usuario:</label><br>
+			<input type="text" id="descrip_usu" name="descrip_usu"><br> <br>
+
+		  <input class="btn btn-outline-danger btn-sm" id="boton-envio-consulta2" value="Consultar">
+
 		  <div id="div_mensaje_ventana_consulta2´"></div>
 	</div>
 
@@ -340,9 +330,7 @@ else
 
 	<!--  semana15 enlace para salir -->
 
-<!--	<?php 
-e
-	?>-->
+
 	
 
 
@@ -1162,7 +1150,7 @@ function onEachFeatureconsulta2(feature, layer)
     
     $("#boton-envio-consulta2").click(function() 
         {    
-            var user_= $('#opciones_form3').val();
+            var user_= $('#descrip_usu').val();
 
             //Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
             $.post("src/funciones.php",
