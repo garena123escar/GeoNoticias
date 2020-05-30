@@ -328,17 +328,17 @@ else
 
 	
 <div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 text-center">  <br>	
-<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > 
-<input  id="boton_ruteo" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> 
-<input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	
-<input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
-<input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" >
-<input  id="boton_Eliminar" value="Borrar Noticias Spam "class="btn btn-danger bt-sm" onClick="location.href='form_delete.php';"> 
-<input  id="boton_Editar" value="Editar Reportes "class="btn btn-danger bt-sm" onClick="location.href='form_update.php';"> 
+<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > <br>
+<input  id="boton_ruteo" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> <br>
+<input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	<br>
+<input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" ><br>
+<input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" ><br>
+<input  id="boton_Eliminar" value="Borrar Noticias Spam "class="btn btn-danger bt-sm" onClick="location.href='form_delete.php';"> <br>
+<input  id="boton_Editar" value="Editar Reportes "class="btn btn-danger bt-sm" onClick="location.href='form_update.php';"> <br>
 <input  id="mapa_reporte3" value="Reporte por tipo"class="btn btn-danger bt-sm" ><br><br>		
 	<br>	<br>	
 <h3> Herramientas </h3>
-<input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" >
+<input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" ><br>	
 <input  id="mapa_cluster" value="Cluster"class="btn border-warning" >
 
 
