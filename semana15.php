@@ -301,6 +301,7 @@ else
 <div class="container-fluid">	
 <div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 text-center">  <br>	
 <input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > 
+<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" onMapClick="location.href='UltimasNoticias.php';"> 
 <input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	
 <input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
 <input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" >
