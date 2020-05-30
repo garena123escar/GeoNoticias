@@ -165,7 +165,32 @@ else
 	</div>
 
 <!--ventana modal mision-->
+<!--consulta por tit> </!-->
+	<div id="ventana-consulta3" class="modal modal-sm">
+		<div class="modal-header">
+		<h3 class="modal-title" id="myModalLabel">Consultar noticia por tipo: </h3>
 
+           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+		<form enctype="multipart/form-data">
+			
+			<label for="opciones_form3">Seleccione el tipo de noticia:</label><br>
+			<select id="opciones_form3" name="opciones_form3">
+			<option value="violencia">Violencia</option>
+			<option value="accidentes">Accidente</option>
+			<option value="hurtos">Hurtos</option>
+			<option value="bloqueos">Bloqueos</option>
+			<option value="Incendios">Incendios</option>
+			<option value="DesNaturales">Desastres naturales</option>
+			</select>
+			<br>
+			
+			<input type="button" id="boton-envio-consulta3" value="Consultar">
+		  </form>
+		  <div id="div_mensaje_ventana_consulta3´"></div>
+	</div>
+<!--fin de consulta 3></!-->
 <!-- Modal -->
 <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog " role="document" >
@@ -293,12 +318,15 @@ else
   </div>
 </nav>
 <div class="row">	
-<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-1 col-xl-2 text-center"> 
+<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 text-center"> 
 </div>
 <div class="display-1 col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7	text-center"> 	
-	<div id="mapid" style="width: 860px; height: 580px; z-index:0;"></div>
+	<div id="mapid" style="width: 860px; height: 500px; z-index:0;"></div>
 	<div id="mensaje_que_cambia"></div>	</div>
-<div class="container-fluid">	
+	<div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-4 text-center btn-left">  <br>
+<input  id="borrar_map" value="Limpiar mapa"class="btn border-primary" onClick="location.href='javascript:location.reload()';"><br><br>
+
+	
 <div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 text-center">  <br>	
 <input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > 
 <input  id="boton_ruteo" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> 
@@ -307,6 +335,7 @@ else
 <input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" >
 <input  id="boton_Eliminar" value="Borrar Noticias Spam "class="btn btn-danger bt-sm" onClick="location.href='form_delete.php';"> 
 <input  id="boton_Editar" value="Editar Reportes "class="btn btn-danger bt-sm" onClick="location.href='form_update.php';"> 
+<input  id="mapa_reporte3" value="Reporte por tipo"class="btn btn-danger bt-sm" ><br><br>		
 	<br>	<br>	
 <h3> Herramientas </h3>
 <input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" >
@@ -319,7 +348,7 @@ else
 
 
 
-</div>
+
 
 
 
@@ -507,6 +536,40 @@ else
 
 
 		//mymap.flyTo([3.372472, -76.533229], 16);
+
+	});
+	var flag_reporte2=false;
+
+
+		$( "#mapa_reporte2" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	  	
+
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "A continuación Eliga el usuario a consultar" );
+	  	//Cambio de estado la vabriable bandera
+	  	var flag_reporte2=true;
+		  lanzarVentanaconsulta2();
+
+
+		//mymap.flyTo([3.372472, -76.533229], 16);
+
+	});
+
+
+	var flag_tipo=false;
+
+	//Evento tipo de noticia por comuna
+	$( "#mapa_reporte3" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	//	mymap.flyTo([3.372472, -76.533229], 16);
+		alert( "Ingrese el tipo de reporte: " );
+	  	//Cambio de estado la vabriable bandera
+		flag_tipo=true;
+	  	//Cambio el cursor 	del mouse sobre el mapa
+	  	lanzarVentanaconsulta3();
 
 	});
 
@@ -1211,6 +1274,89 @@ function onEachFeatureconsulta2(feature, layer)
                       clickClose: true,
                 });
         }
+
+//consulta 3 
+ function onEachFeatureconsulta3(feature, layer) 
+	{
+			
+		console.log(feature.properties.comuna);
+		if (feature.properties && feature.properties.comuna) 
+		{
+			var mensaje ='<b><b>ID: </b>' +feature.properties.id_reporte;
+			mensaje +='<br><b>Barrio: </b> '+feature.properties.comuna;
+			mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
+			mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
+			
+
+			layer.bindPopup(mensaje);
+		}
+    }	
+
+
+$("#boton-envio-consulta3").click(function() 
+	{
+		console.log('Enviar formulario y cerrar ventana modal');
+		//capturar los datos del formulario
+
+		var tipo_= $('#opciones_form3').val();
+	
+
+		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
+		$.post("src/funciones.php",
+			{
+				peticion: 'Reportes-x-tipo', 
+				parametros: { tipo: tipo_ }
+			},
+			function(data, status){
+				console.log("Datos recibidos: " + data + "\nStatus: " + status);
+				if(status=='success')
+				{
+					//console.log(data);
+					//mymap.removeLayer(capaGeojsonconsulta); 
+                    geojsonFeatureconsulta3= eval('('+data+')');
+                    
+
+                    capaGeojsonconsulta3 = L.geoJson(geojsonFeatureconsulta3,
+                    {
+						pointToLayer: function (feature, latlng) 
+						{
+							//Icons from https://mapicons.mapsmarker.com/
+							var smallIcon = L.icon(
+							{
+							iconSize: [27, 27],
+							iconAnchor: [13, 27],
+							popupAnchor:  [1, -24],
+							iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
+						});
+						
+							return L.marker(latlng, {icon: smallIcon}); 
+						},onEachFeature: onEachFeatureconsulta3
+						
+					} ).addTo(mymap);
+
+				}
+			});	
+		//Para cerrar la ventana modal	
+		$.modal.close();
+	});
+
+
+	function lanzarVentanaconsulta3(e)
+	{
+	
+		//Limpio los campos del formulario
+		$('#opciones_form3').val("");
+		
+		$('#div_mensaje_ventana_consulta3').html("");
+
+		// lanzo ventana modal para consulta
+		$('#ventana-consulta3').modal(
+			{
+				closeExisting: false,
+				escapeClose: true,
+  				clickClose: true,
+			});
+	}
 
 
     //funcion mapa de calor Semana15
