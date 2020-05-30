@@ -46,4 +46,4 @@ los mismos como un arreglo
 </div>
 
 <br>
-<a href="./semana15.php">Volver al Geovisor</a>
+<a  href='semana15.php?logueado=si'>Volver al Geovisor</a>
