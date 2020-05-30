@@ -305,7 +305,8 @@ else
 <input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	
 <input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
 <input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" >
-
+<input  id="boton_Eliminar" value="Borrar Noticias Spam "class="btn btn-danger bt-sm" onClick="location.href='form_delete.php';"> 
+<input  id="boton_Editar" value="Editar Reportes "class="btn btn-danger bt-sm" onClick="location.href='form_update.php';"> 
 	<br>	<br>	
 <h3> Herramientas </h3>
 <input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" >
