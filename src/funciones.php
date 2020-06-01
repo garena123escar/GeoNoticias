@@ -330,7 +330,19 @@
 				  echo $row[0];
 			  break;
 			}
+		case 'conteo-x-tipo':
+			{
+				$tipo = $parametros['tipo'];
 	
+				$sql="select r.count, r.tipo from reporte r where r.tipo ='$tipo' group by r.tipo ";
+					  
+					$query4 = pg_query($dbcon,$sql);
+					$row = pg_fetch_row($query4); 
+					echo $row['r.count'];
+					
+					  
+				break;
+			}
    }
     
 

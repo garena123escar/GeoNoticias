@@ -190,6 +190,31 @@ else
 		  </form>
 		  <div id="div_mensaje_ventana_consulta3´"></div>
 	</div>
+<!--consulta 4-->
+	<div id="ventana-consulta4" class="modal modal-sm">
+		<div class="modal-header">
+		<h3 class="modal-title" id="myModalLabel">Consultar cuantas noticia por tipo hay actualmente: </h3>
+
+           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+      </div>
+		<form enctype="multipart/form-data">
+			
+			<label for="opciones_form4">Seleccione el tipo de noticia:</label><br>
+			<select id="opciones_form4" name="opciones_form4">
+			<option value="violencia">Violencia</option>
+			<option value="accidentes">Accidente</option>
+			<option value="hurtos">Hurtos</option>
+			<option value="bloqueos">Bloqueos</option>
+			<option value="Incendios">Incendios</option>
+			<option value="DesNaturales">Desastres naturales</option>
+			</select>
+			<br>
+			
+			<input type="button" id="boton-envio-consulta4" value="Consultar">
+		  </form>
+		  <div id="div_mensaje_ventana_consulta4´"></div>
+	</div>
 <!--fin de consulta 3></!-->
 <!-- Modal -->
 <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -329,28 +354,23 @@ else
 	
 <div class="display-6 col-6 col-sm-6 col-md-6 col-lg-12 col-xl-12 text-center">  <br>	
 <input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > <br>
-<input  id="boton_ruteo" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> <br>
+<input  id="boton_Ultimas" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> <br>
 <input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >	<br>
 <input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" ><br>
 <input  id="mapa_reporte2" value="Reporte por usuario"class="btn btn-danger bt-sm" ><br>
 <input  id="boton_Eliminar" value="Borrar Noticias Spam "class="btn btn-danger bt-sm" onClick="location.href='form_delete.php';"> <br>
 <input  id="boton_Editar" value="Editar Reportes "class="btn btn-danger bt-sm" onClick="location.href='form_update.php';"> <br>
-<input  id="mapa_reporte3" value="Reporte por tipo"class="btn btn-danger bt-sm" ><br><br>		
+<input  id="mapa_reporte3" value="Reporte por tipo"class="btn btn-danger bt-sm" ><br><br>
+<input  id="boton_conteo" value="Conteo de noticias"class="btn btn-danger bt-sm" ><br><br>		
 	<br>	<br>	
 <h3> Herramientas </h3>
 <input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" ><br>	
-<input  id="mapa_cluster" value="Cluster"class="btn border-warning" >
+<input  id="mapa_cluster" value="Noticias Reportadas"class="btn border-warning" >
 
 
 
 
 </div>
-
-
-
-
-
-
 
 </div>
 
@@ -538,10 +558,10 @@ else
 		//mymap.flyTo([3.372472, -76.533229], 16);
 
 	});
-	var flag_reporte2=false;
+	/*var flag_conteo=false;
 
 
-		$( "#mapa_reporte2" ).click(function() 
+		$("#boton_conteo" ).click(function() 
 	{
 	  	//vuelo hacia univalle
 	  	
@@ -549,13 +569,13 @@ else
 	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "A continuación Eliga el usuario a consultar" );
 	  	//Cambio de estado la vabriable bandera
-	  	var flag_reporte2=true;
-		  lanzarVentanaconsulta2();
+	  	var flag_conteo=true;
+		  lanzarVentanaconteo();
 
 
 		//mymap.flyTo([3.372472, -76.533229], 16);
 
-	});
+	});*/
 
 
 	var flag_tipo=false;
@@ -672,7 +692,7 @@ else
 			});	
 	}
 
-	//Solucion tarea -- Sitios de Interes
+//Solucion tarea -- Sitios de Interes
 	var capaGeojsonSitiosInteres = L.geoJson();
 	function cargarSitiosInteres()
 	{
@@ -770,9 +790,9 @@ else
 			layer.bindPopup(mensaje);
 		}
 	}
-	
 
-	//RUTA MAS CORTA ENTRE DOS PUNTOS ( CLASE 10 )
+
+//RUTA MAS CORTA ENTRE DOS PUNTOS ( CLASE 10 )
 
 	var conteoClicks=1;
 	var coordenadasPuntoInicial = {};
@@ -1019,7 +1039,7 @@ else
     }	
 
 //para recuperar las vias
-function recuperarvias()
+	function recuperarvias()
 	{
 		$.post("src/funciones.php",
 		{
@@ -1107,9 +1127,9 @@ function recuperarvias()
 
 //CONSULTA 1
 
-//icono para cada reporte
+	//icono para cada reporte
 
-function onEachFeatureconsulta(feature, layer) 
+	function onEachFeatureconsulta(feature, layer) 
 	{
 			
 		console.log(feature.properties.comuna);
@@ -1126,7 +1146,7 @@ function onEachFeatureconsulta(feature, layer)
     }	
 
 
-$("#boton-envio-consulta").click(function() 
+	$("#boton-envio-consulta").click(function() 
 	{
 		console.log('Enviar formulario y cerrar ventana modal');
 		//capturar los datos del formulario
@@ -1192,9 +1212,9 @@ $("#boton-envio-consulta").click(function()
 			});
 	}
 
-	 //CONSULTA 2
+//CONSULTA 2
 	
-function onEachFeatureconsulta2(feature, layer) 
+	function onEachFeatureconsulta2(feature, layer) 
 	{
 			
 		console.log(feature.properties.comuna);
@@ -1275,7 +1295,7 @@ function onEachFeatureconsulta2(feature, layer)
                 });
         }
 
-//consulta 3 
+//CONSULTA 3 
  function onEachFeatureconsulta3(feature, layer) 
 	{
 			
@@ -1293,7 +1313,7 @@ function onEachFeatureconsulta2(feature, layer)
     }	
 
 
-$("#boton-envio-consulta3").click(function() 
+	$("#boton-envio-consulta3").click(function() 
 	{
 		console.log('Enviar formulario y cerrar ventana modal');
 		//capturar los datos del formulario
@@ -1358,8 +1378,55 @@ $("#boton-envio-consulta3").click(function()
 			});
 	}
 
+/*CONSULTA 4
+	$("#boton-envio-consulta4").click(function() 
+	{
+		console.log('Enviar formulario y cerrar ventana modal');
+		//capturar los datos del formulario
 
-    //funcion mapa de calor Semana15
+		var tipo_= $('#opciones_form4').text();
+	
+
+		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
+		$.post("src/funciones.php",
+			{
+				peticion: 'Conteo-x-tipo', 
+				parametros: { tipo: tipo_ }
+			},
+			function(data, status){
+				console.log("Datos recibidos: " + data + "\nStatus: " + status);
+				if(status=='success')
+				{
+					
+				}
+			});	
+		//Para cerrar la ventana modal	
+		$.modal.close();
+	});*/
+	function abrir_ventana(url){
+		window.open("conteo.php","conteo","width=200,heigth=200");
+	}
+	document.getElementById("boton_conteo").onclick = function() {abrir_ventana()};	
+
+
+	function lanzarVentanaconteo(e)
+	{
+	
+		//Limpio los campos del formulario
+		$('#opciones_form4').val("");
+		
+		$('#div_mensaje_ventana_consulta4').html("");
+
+		// lanzo ventana modal para consulta
+		$('#ventana-consulta4').modal(
+			{
+				closeExisting: false,
+				escapeClose: true,
+  				clickClose: true,
+			});
+    }
+
+//funcion mapa de calor Semana15
 	var arrayPoints='[';
 	function mapaCalor()
 	{
@@ -1387,7 +1454,7 @@ $("#boton-envio-consulta3").click(function()
 	}
 
  	
-	 //funcion para estilo del popup mapa de calor Semana15
+//funcion para estilo del popup mapa de calor Semana15
 	function onEachFeatureStyledIconCluster(feature, layer) 
 	{
 		if (feature.properties) 

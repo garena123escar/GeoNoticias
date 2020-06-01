@@ -138,11 +138,11 @@ if (!$edifico) {
 
 <div class="container-fluid">
 	<div class="row">
-	<div class="display-6 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12	text-center"> 	
+	<div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12	text-center"> 	
 
 	<div>
-		<h1>Actualizar Reporte</h1><br>
-		<form action="update.php" method="POST">
+		<h1>Conteo de Reportes</h1><br>
+		<form action="func_conteo.php" method="POST">
 			<input type="hidden" name="id_reporte" value="<?php echo $edifico->id_reporte; ?>">
 			
 			<div>
@@ -158,12 +158,8 @@ if (!$edifico) {
 			</select>
 			<br>
 			</div>
-			<div>
-				<label for="Descripcion">Actualizar descripción</label>	
-				<input value="<?php echo $edifico->descripcion; ?>" required name="descripcion" type="text" id="descripcion" placeholder="descripcion">
-			</div>
 			<br>
-			<input  id="boton_actualizar" value="Actualizar reporte "class="btn btn-danger bt-sm" type="submit"> <br>
+			<button type="submit">consultar</button>
 			<br><br>
 		</form>
 	</div>
