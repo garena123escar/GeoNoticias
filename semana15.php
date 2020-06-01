@@ -246,7 +246,7 @@ else
 
 <!--ventana modal mision-->
 
-	<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
+<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
 	<div id="ventana-reporte" class="modal">
 		<div class="modal-header">
 		<h3 class="modal-title" id="myModalLabel">Generar reporte de noticias</h3>
@@ -361,43 +361,17 @@ else
 <input  id="boton_Eliminar" value="Borrar Noticias Spam "class="btn btn-danger bt-sm" onClick="location.href='form_delete.php';"> <br>
 <input  id="boton_Editar" value="Editar Reportes "class="btn btn-danger bt-sm" onClick="location.href='form_update.php';"> <br>
 <input  id="mapa_reporte3" value="Reporte por tipo"class="btn btn-danger bt-sm" ><br><br>
-<input  id="boton_conteo" value="Conteo de noticias"class="btn btn-danger bt-sm" ><br><br>		
+<input  id="boton_conteo" value="Conteo de noticias"class="btn btn-danger bt-sm"onClick="location.href='conteo_comuna.php';" ><br><br>		
 	<br>	<br>	
 <h3> Herramientas </h3>
 <input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" ><br>	
 <input  id="mapa_cluster" value="Noticias Reportadas"class="btn border-warning" >
 
-
-
-
 </div>
 
 </div>
-
-
 </body>
 
-
-
-	<!--  semana15 enlace para salir -->
-
-
-	
-
-
-	<!-- Boton Ruteo entre dos puntos -->
-
-
-	<!-- FIN Boton Ruteo entre dos puntos -->
-
-
-
-
-  
-  <!-- Link para abir la ventana modal -->
- <!-- <p><a href="ventana-consulta" rel="modal:open">Abrir ventana modal (ejemplo 1)</a></p>-->
-
-  <!-- Link para abir la ventana modal -->
 
 
 <script>
@@ -428,6 +402,13 @@ else
 		transparent: true
 	});
 	
+	var wmsLayer2 = L.tileLayer.wms('http://idesc.cali.gov.co:8081/geoserver/wms?service=WMS&version=1.1.0', 
+	{
+		layers: 'idesc:mc_barrios',
+		attribution: 'Creditos de la capa',
+		format: 'image/png',
+		transparent: true
+	});
 	
 	var mymap = L.map('mapid',
 	{
@@ -439,24 +420,19 @@ else
 	wmsLayer.addTo(mymap);
 	
 	
-	
-	
 	var groupedOverlays = {
 	
 	  "Capas idecs": {
-		"Manzanas": wmsLayer
+		"Manzanas": wmsLayer,
+		"Barrios": wmsLayer2
 	  },
 	};
-
-
-	//hacer este cambio
-	//L.control.groupedLayers(basemaps, groupedOverlays).addTo(mymap);
 	
 	var layerControl=L.control.groupedLayers(basemaps, groupedOverlays);
 	layerControl.addTo(mymap);
 
 
-	//Creo una variable booleana (bandera) para saber cuando se requiere el ruteo 
+//Creo una variable booleana (bandera) para saber cuando se requiere el ruteo 
 	var flag_ruteo=false;
 
 	//Evento click para boton_ruteo
@@ -472,143 +448,77 @@ else
 	});
 //Creo una variable booleana (bandera) para saber cuando se requiere el ruteo 
 	var flag_reporte=false;
-
-	//Evento tipo de noticia por comuna
-	$( "#boton_reporte" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "Ingrese el tipo de reporte y la comuna: " );
-	  	//Cambio de estado la vabriable bandera
-		flag_reporte=true;
-	  	//Cambio el cursor 	del mouse sobre el mapa
-	  	lanzarVentanaconsulta();
-
-	});
+		//Evento tipo de noticia por comuna
+		$( "#boton_reporte" ).click(function() 
+		{
+			alert( "Ingrese el tipo de reporte y la comuna: " );
+	  		//Cambio de estado la vabriable bandera
+			flag_reporte=true;
+	  		//Cambio el cursor 	del mouse sobre el mapa
+	  		lanzarVentanaconsulta();
+		});
 
 
 	var flag_registrar=false;
-
-
-		$( "#boton_reporte_cliente" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación marque el sitio de reporte:" );
-	  	//Cambio de estado la vabriable bandera
-		document.getElementById('mapid').style.cursor = 'crosshair';
-		flag_registrar=true;
-		lanzarVentanaRegistro(e);
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-	});
+			$( "#boton_reporte_cliente" ).click(function() 
+		{
+			alert( "A continuación marque el sitio de reporte:" );
+	  		//Cambio de estado la vabriable bandera
+			document.getElementById('mapid').style.cursor = 'crosshair';
+			flag_registrar=true;
+			lanzarVentanaRegistro(e);
+		});
 		
-	
-
 	var flag_calor=false;
 
-
-		$( "#mapa_calor" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	  	var flag_calor=false;
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación se muestra el mapa de calor:" );
-	  	//Cambio de estado la vabriable bandera
-	  	mapaCalor();
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-
-	});
+			$( "#mapa_calor" ).click(function() 
+		{
+	  		var flag_calor=false;
+			alert( "A continuación se muestra el mapa de calor:" );
+	  		//Cambio de estado la vabriable bandera
+	  		mapaCalor();
+		});
 		
 
 	var flag_cluster=false;
+			$( "#mapa_cluster" ).click(function() 
+		{
+	  		//vuelo hacia univalle
+	  		var flag_clustter=false;
 
-
-		$( "#mapa_cluster" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	  	var flag_clustter=false;
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación se muestra el cluster de noticias:" );
-	  	//Cambio de estado la vabriable bandera
-	  	cargarCluster();
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-
-	});
+			alert( "A continuación se muestra el cluster de noticias:" );
+	  		//Cambio de estado la vabriable bandera
+	  		cargarCluster();
+		
+		});
 	
-		var flag_reporte2=false;
-
-
+	var flag_reporte2=false;
 		$( "#mapa_reporte2" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	  	
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación Eliga el usuario a consultar" );
-	  	//Cambio de estado la vabriable bandera
-	  	var flag_reporte2=true;
-		  lanzarVentanaconsulta2();
-
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-
-	});
-	/*var flag_conteo=false;
-
-
-		$("#boton_conteo" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	  	
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación Eliga el usuario a consultar" );
-	  	//Cambio de estado la vabriable bandera
-	  	var flag_conteo=true;
-		  lanzarVentanaconteo();
-
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-
-	});*/
-
+		{
+			alert( "A continuación Eliga el usuario a consultar" );
+	  		//Cambio de estado la vabriable bandera
+	  		var flag_reporte2=true;
+		 	lanzarVentanaconsulta2();
+		});
 
 	var flag_tipo=false;
 
-	//Evento tipo de noticia por comuna
-	$( "#mapa_reporte3" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "Ingrese el tipo de reporte: " );
-	  	//Cambio de estado la vabriable bandera
-		flag_tipo=true;
-	  	//Cambio el cursor 	del mouse sobre el mapa
-	  	lanzarVentanaconsulta3();
+		//Evento tipo de noticia por comuna
+		$( "#mapa_reporte3" ).click(function() 
+		{
 
-	});
+			alert( "Ingrese el tipo de reporte: " );
+	  		//Cambio de estado la vabriable bandera
+			flag_tipo=true;
+	  		lanzarVentanaconsulta3();
+
+		});
 
 
 	
 	var popup = L.popup();
 
-
-	//Boton Ejemplo para mostrar evento click sobre el mapa
-
-    //Semana 13
-	//Boton Ejemplo para registrar 
-
-	function onMapClick(e) {
-		//Clase 10 - Comentar evento click y retorno de coordenadas
-		//popup
-		//	.setLatLng(e.latlng)
-		//	.setContent("Usted realizo un Click en las coordenadas:  " + e.latlng.toString())
-		//	.openOn(mymap);
+function onMapClick(e) {
 
 		//Si doy click sobre el mapa, estando en true la variable bandera
 		if(flag_ruteo)
@@ -634,7 +544,7 @@ else
 
 	}
 
-	function funcionNueva(){
+function funcionNueva(){
 		alert("soy una funcion nueva");
 		flag_otro=false;
 	        document.getElementById('mapid').style.cursor = '';
@@ -649,147 +559,6 @@ else
 	
 	
 	var helloPopup = L.popup().setContent('Mensaje desde boton');
-
-	
-
-
-
-
-
-
-
-	//Boton Ejemplo para mostrar evento click sobre el mapa
-
-
-    //Semana 13
-	//Boton Ejemplo para registrar 
-
-
-
-	//Semana 15  --  Boton Para Mapa de Calor
-
-	
-
-
-
-	var capaGeojsonEdificios = L.geoJson();
-	function cargarEdificios()
-	{
-		//Hago la peticion recupera-edificios-geojson mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'recupera-edificios-geojson'
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					//console.log(data);
-					mymap.removeLayer(capaGeojsonEdificios); 
-					geojsonFeatureEdificios= eval('('+data+')');
-					capaGeojsonEdificios = L.geoJson(geojsonFeatureEdificios, {onEachFeature: onEachFeatureEdificio }).addTo(mymap);	
-				}
-			});	
-	}
-
-//Solucion tarea -- Sitios de Interes
-	var capaGeojsonSitiosInteres = L.geoJson();
-	function cargarSitiosInteres()
-	{
-		//Hago la peticion recupera-sitios-interes-geojson mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'recupera-sitios-interes-geojson'
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					//console.log(data);
-					mymap.removeLayer(capaGeojsonSitiosInteres); 
-					geojsonFeatureSitiosInteres= eval('('+data+')');
-					
-					//Agrego la capa de puntos
-					capaGeojsonSitiosInteres = L.geoJson(geojsonFeatureSitiosInteres, 
-					{
-						pointToLayer: function (feature, latlng) 
-						{
-							//Icons from https://mapicons.mapsmarker.com/
-							var smallIcon = L.icon(
-							{
-							iconSize: [27, 27],
-							iconAnchor: [13, 27],
-							popupAnchor:  [1, -24],
-							iconUrl: 'images/icono_'+feature.properties.type+'.png' 
-						});
-						
-							return L.marker(latlng, {icon: smallIcon}); 
-						},onEachFeature: onEachFeatureSitiosInteres 
-						
-					} ).addTo(mymap);
-
-				}
-			});	
-	}
-	
-
-	var estiloPoligonoEdificiosDefecto = 
-	{
-		radius: 8,
-		fillColor: "#ff7800",
-		color: "#000",
-		weight: 1,
-		opacity: 1,
-		fillOpacity: 0.8
-	};
-	
-	
-	var estiloPoligonoEdificioMouseEncima = 
-	{
-		radius: 8,
-		fillColor: "#000000",
-		color: "#000",
-		weight: 1,
-		opacity: 1,
-		fillOpacity: 0.8
-	};
-
-	function onEachFeatureEdificio(feature, layer) 
-	{
-		//Asigno estilo a cada edificio		
-		layer.setStyle(estiloPoligonoEdificiosDefecto);		
-		console.log(feature.properties.name);
-		if (feature.properties && feature.properties.name) {
-			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>UBICACION: </b>' +feature.properties.localiza);
-			
-			layer.on('mouseover', function() 
-			{ 
-				//Se agrego para cambiar el color del elemento cuando se ubique el mouse 
-				this.setStyle(estiloPoligonoEdificioMouseEncima);				
-				$('#mensaje_que_cambia').html('<h1>'+feature.properties.name+'</h1>');
-			});
-		        layer.on('mouseout', function() 
-			{
-				$('#mensaje_que_cambia').html('<h1>&nbsp;</h1>');
-				this.setStyle(estiloPoligonoEdificiosDefecto);
-			});	
-		}
-	}
-	
-
-	//Para cada reporte
-	function onEachFeatureSitiosInteres(feature, layer) 
-	{
-		//Asigno estilo a cada reporte		
-		console.log(feature.properties.name);
-		if (feature.properties && feature.properties.name) 
-		{
-			var mensaje = '<b>NOMBRE: </b> '+feature.properties.name;
-			mensaje +='<br><b>ID: </b>' + feature.properties.tipo;
-			mensaje +='<br><b>TIPO: </b>' +feature.properties.localizaci;
-			layer.bindPopup(mensaje);
-		}
-	}
 
 
 //RUTA MAS CORTA ENTRE DOS PUNTOS ( CLASE 10 )
@@ -1038,92 +807,6 @@ else
 		}
     }	
 
-//para recuperar las vias
-	function recuperarvias()
-	{
-		$.post("src/funciones.php",
-		{
-			peticion: 'recupera-via',
-		},
-		function(data, status)
-		{
-			console.log("Datos recibidos: " + data + "\nStatus: " + status);
-			if(status=='success')
-			{
-				mymap.removeLayer(capaGeojsonvias); 
-				layerControl._update();
-				geojsonFeaturevia= eval('('+data+')');
-
-				capaGeojsonvias = L.geoJson(geojsonFeaturevia,  {style: miEstiloLinea1Ruta  }).addTo(mymap);
-				mymap.addLayer(capaGeojsonvias); 
-				layerControl._update();
-				capaGeojsonvias.addTo( mymap );
-            }
-        });    
-    }   
-
-	//Evento click para boton boton-envio-reporte
-	$("#boton-envio-reporte").click(function() 
-	{
-		console.log('Enviar formulario y cerrar ventana modal');
-		//capturar los datos del formulario
-
-		var cx_ = $('#cx_form').val();
-		var cy_ = $('#cy_form').val();
-		var opcion_ = $('#opciones_form').val();
-		var descripcion_ = $('#descrip_form').val();
-		var usuario_= "<?php echo $_SESSION["iduser"];?>";
-		var usuario_1= "<?php echo $_SESSION["usuario"];?>";
-
-
-
-		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'registro-desde-ventana-modal', 
-				parametros: {  x:cx_ ,  y: cy_,  tipo: opcion_ , descripcion: descripcion_, usuario : usuario_,nombres:usuario_1}
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					if(data=='NUEVO_REPORTE_CREADO')
-					{
-					   $('#div_mensaje_ventana_reporte').html('<h2>Su reporte ha sido registrado</h2>');
-					}else
-					{
-						$('#div_mensaje_ventana_reporte').html('<h2>Lo sentimos, no se puede realizar el reporte</h2>');	
-					}	
-				}
-			});	
-		//Para cerrar la ventana modal	
-		$.modal.close();
-	});
-
-
-	function lanzarVentanaRegistro(e)
-	{
-		// Capturo las coordenadas clickeadas sobre el mapa
-		coordenada_y = e.latlng.lat.toString();
-		coordenada_x = e.latlng.lng.toString();
-		// Envio las coordenadas a los campos dentro del form
-		$('#cx_form').val(coordenada_x);
-		$('#cy_form').val(coordenada_y);
-
-		//Limpio los campos del formulario
-		$('#opciones_form').val("");
-		$('#descripcion_form').val("");
-		$('#div_mensaje_ventana_reporte').html("");
-
-		// lanzo ventana modal para registrar datos de reporte
-		$('#ventana-reporte').modal(
-			{
-				closeExisting: false,
-				escapeClose: true,
-  				clickClose: true,
-			});
-	}
-
 
 //CONSULTA 1
 
@@ -1220,11 +903,11 @@ else
 		console.log(feature.properties.comuna);
 		if (feature.properties && feature.properties.comuna) 
 		{
-			var mensaje ='<b><b>ID reporte: </b>' +feature.properties.id_reporte;
-			mensaje +='<br><b>Comuna: </b> '+feature.properties.comuna;
-			mensaje +='<br><b>Reporte: </b>' + feature.properties.descripcion;
+			var mensaje ='<b><b>ID REPORTE: </b>' +feature.properties.id_reporte;
+			mensaje +='<br><b>COMUNA: </b> '+feature.properties.comuna;
+			mensaje +='<br><b>REPORTE: </b>' + feature.properties.descripcion;
 			mensaje +='<br><b>TIPO: </b>' +feature.properties.tipo;
-			mensaje +='<br><b>usuario: </b>' +feature.properties.usuario;
+			mensaje +='<br><b>USUARIO: </b>' +feature.properties.usuario;
 
 			
 
@@ -1378,53 +1061,6 @@ else
 			});
 	}
 
-/*CONSULTA 4
-	$("#boton-envio-consulta4").click(function() 
-	{
-		console.log('Enviar formulario y cerrar ventana modal');
-		//capturar los datos del formulario
-
-		var tipo_= $('#opciones_form4').text();
-	
-
-		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'Conteo-x-tipo', 
-				parametros: { tipo: tipo_ }
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					
-				}
-			});	
-		//Para cerrar la ventana modal	
-		$.modal.close();
-	});*/
-	function abrir_ventana(url){
-		window.open("conteo.html","conteo","width=100,heigth=100");
-	}
-	document.getElementById("boton_conteo").onclick = function() {abrir_ventana()};	
-
-
-	function lanzarVentanaconteo(e)
-	{
-	
-		//Limpio los campos del formulario
-		$('#opciones_form4').val("");
-		
-		$('#div_mensaje_ventana_consulta4').html("");
-
-		// lanzo ventana modal para consulta
-		$('#ventana-consulta4').modal(
-			{
-				closeExisting: false,
-				escapeClose: true,
-  				clickClose: true,
-			});
-    }
 
 //funcion mapa de calor Semana15
 	var arrayPoints='[';

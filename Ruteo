@@ -33,8 +33,8 @@ source::integer,target::integer,costo::double precision as cost from
  vias',(select s.id::int from
 (select n.id, st_distance( st_setsrid(st_makepoint (-76.533364756,3.370831158),4326),n.the_geom) 
 from vias_vertices_pgr as n order by 2 asc limit 1) as s),(select g.id::int from (select b.id,st_distance(a.geom, b.the_geom)  
-from fuerza_publica as a, vias_vertices_pgr as b
-where tipo = '%BOMBEROS' order by 2 asc limit 1) as g) ,false,false) a left join vias b on (a.id2 = b.gid);
+from fuerza_publica1 as a, vias_vertices_pgr as b
+where gid = 1 order by 2 asc limit 1) as g) ,false,false) a left join vias b on (a.id2 = b.gid);
 
  select * from ruteo2
 
@@ -57,3 +57,14 @@ id2 as edge, cost, b.geom from pgr_dijkstra('select gid as id,
 		left join vias b on (a.id2=b.gid);
 
 select * from resultado_ruteo
+select * from vias
+
+create table fuerza_publica1 as
+select gid, name,localizaci,tipo, st_centroid(st_union(geom)) as geom from fuerza_publica group by gid, name,localizaci,tipo ;
+
+
+select r.count as conteo, r.tipo as tipo from reporte r  group by r.tipo
+
+
+
+select distinct r.count as conteo, b.barrio as tipo from reporte r, barrios b where st_intersects(b.geom,st_setsrid(st_makepoint (r.x,r.y),4326)) group by b.barrio
