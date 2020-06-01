@@ -1404,7 +1404,7 @@ else
 		$.modal.close();
 	});*/
 	function abrir_ventana(url){
-		window.open("conteo.php","conteo","width=200,heigth=200");
+		window.open("conteo.html","conteo","width=100,heigth=100");
 	}
 	document.getElementById("boton_conteo").onclick = function() {abrir_ventana()};	
 
