@@ -28,8 +28,18 @@ $resultado = $sql->execute([$usuario, $nombre,$apellido, $telefono, $contrasena,
 #execute regresa un booleano. True en caso de que todo vaya bien, falso en caso contrario.
 #Con eso podemos evaluar
 if ($resultado === true) {
-    # Redireccionar a la lista
-header ("location: index.php");	
-} else {
-    echo "Algo salio mal. Por favor verifica que la tabla exista";
+    ?>
+    <script type="text/javascript">alert("Tu Cuenta Ha Sido Creada Con Exito");
+    window.location = "index.php";
+    </script>
+  
+    <?php
+  } else {
+  
+      $error = "Error: ".pg_last_error()
+      ?>
+      <script type="text/javascript">alert("<?php echo $error; ?>");
+      window.location = "create_usu.php";
+    </script>
+  <?php
 }
