@@ -369,8 +369,10 @@ else
           <a class="dropdown-item" href="https://www.webwhatsapp.com">Whatsapp</a>       
       </div>
       </li>
-      <li class="active"><a id="boton_quienes_somos" href="index.php?op=salir" class="btn btn-outline-danger btn-lg">Cerrar sesión</a></li>
-    </ul>
+	  <li class="active"><a id="boton_Editar_usuario" href="form_update_usu.php" class="btn btn-outline-danger btn-lg">Perfil</a> <li> 
+	  <li class="active"><a id="boton_quienes_somos" href="index.php?op=salir" class="btn btn-outline-danger btn-lg">Cerrar sesión</a></li>
+
+	</ul>
 
   </div>
   </div>
@@ -380,7 +382,6 @@ else
 <div class="display-4 col-12 col-sm-12 col-md-12 col-lg-1 col-xl-2 text-center">  
 <h3>	Geovisor</h3>	
 <input  id="borrar_map" value="Limpiar mapa"class="btn border-primary" onClick="location.href='javascript:location.reload()';"><br> <br>	<br>		
-<input  id="boton_ruteo" value="Calcula Ruta "class="btn btn-danger bt-sm" > 
 <input  id="boton_ruteo" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> 
 <input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >
 <input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
@@ -397,7 +398,8 @@ else
 
 <h3> Herramientas </h3>
 <input  id="boton_conteo" value="Conteo por tipos"class="btn border-danger"  onClick="location.href='conteo_tipo.php';"><br>	<br>
-<input  id="mapa_cluster" value="Cluster"class="btn border-warning" ><br><br>
+<input  id="mapa_cluster" value="Visualizar Todas las Noticias"class="btn border-warning" ><br><br>
+<input  id="mapa_clustert" value="Visualizar Noticias del Dia"class="btn border-warning" ><br><br>
 
 
 </div>
@@ -412,28 +414,6 @@ else
 
 
 </body>
-
-
-
-	<!--  semana15 enlace para salir -->
-
-
-	
-
-
-	<!-- Boton Ruteo entre dos puntos -->
-
-
-	<!-- FIN Boton Ruteo entre dos puntos -->
-
-
-
-
-  
-  <!-- Link para abir la ventana modal -->
- <!-- <p><a href="ventana-consulta" rel="modal:open">Abrir ventana modal (ejemplo 1)</a></p>-->
-
-  <!-- Link para abir la ventana modal -->
 <script>
 	
 
@@ -441,14 +421,10 @@ else
 
 		$( "#boton_reporte_cliente1" ).click(function() 
 	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "A continuación se ingresará su ubicación:" );
 	  	//Cambio de estado la vabriable bandera
 		flag_registrar1=true;
 		render();
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
 	});
 
 	//Evento click para boton boton-envio-reporte
@@ -577,21 +553,6 @@ else
 	var layerControl=L.control.groupedLayers(basemaps, groupedOverlays);
 	layerControl.addTo(mymap);
 
-
-	//Creo una variable booleana (bandera) para saber cuando se requiere el ruteo 
-	var flag_ruteo=false;
-
-	//Evento click para boton_ruteo
-	$( "#boton_ruteo" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-		mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "Click sobre el Mapa, indicando el punto Inicial" );
-	  	//Cambio de estado la vabriable bandera
-		flag_ruteo=true;
-	  	//Cambio el cursor 	del mouse sobre el mapa
-	  	document.getElementById('mapid').style.cursor = 'crosshair';
-	});
 //Creo una variable booleana (bandera) para saber cuando se requiere el ruteo 
 	var flag_reporte=false;
 
@@ -613,19 +574,14 @@ else
 
 		$( "#boton_reporte_cliente" ).click(function() 
 	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
+	 
 		alert( "A continuación marque el sitio de reporte:" );
 	  	//Cambio de estado la vabriable bandera
 		document.getElementById('mapid').style.cursor = 'crosshair';
 		flag_registrar=true;
 		lanzarVentanaRegistro(e);
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
 	});
-		
 	
-
 	var flag_calor=false;
 
 
@@ -633,13 +589,9 @@ else
 	{
 	  	//vuelo hacia univalle
 	  	var flag_calor=false;
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "A continuación se muestra el mapa de calor:" );
 	  	//Cambio de estado la vabriable bandera
 	  	mapaCalor();
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
 
 	});
 		
@@ -651,16 +603,23 @@ else
 	{
 	  	//vuelo hacia univalle
 	  	var flag_clustter=false;
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "A continuación se muestra el cluster de noticias:" );
 	  	//Cambio de estado la vabriable bandera
 	  	cargarCluster();
 
-		//mymap.flyTo([3.372472, -76.533229], 16);
+	});
+	var flag_clustert=false;
+
+
+		$( "#mapa_clustert" ).click(function() 
+	{
+	  	//vuelo hacia univalle
+	  	var flag_clustert=false;
+		alert( "A continuación se muestran las noticias del dia" );
+	  	//Cambio de estado la vabriable bandera
+	  	cargarClustert();
 
 	});
-	
 		var flag_reporte2=false;
 
 
@@ -715,16 +674,6 @@ else
 	});
 
 
-
-
-	var popup = L.popup();
-
-
-	//Boton Ejemplo para mostrar evento click sobre el mapa
-//INTENTO DE LOCALIZARME 
-
-
-
 	  navigator.geolocation.watchPosition(b);
 
   function b(f) {
@@ -736,23 +685,11 @@ else
   };
 
   ////TERMINA INTENTO 
-    //Semana 13
-	//Boton Ejemplo para registrar 
+
 
 	function onMapClick(e) {
-		//Clase 10 - Comentar evento click y retorno de coordenadas
-		//popup
-		//	.setLatLng(e.latlng)
-		//	.setContent("Usted realizo un Click en las coordenadas:  " + e.latlng.toString())
-		//	.openOn(mymap);
-
-		//Si doy click sobre el mapa, estando en true la variable bandera
-		if(flag_ruteo)
-		{
-			rutaMasCortaEntreDosPuntos(e);
-		}
-		else
-		if(flag_registrar)
+	
+	if(flag_registrar)
 		{
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 			lanzarVentanaRegistro(e);
@@ -776,11 +713,6 @@ else
 
 	}
 
-	function funcionNueva(){
-		alert("soy una funcion nueva");
-		flag_otro=false;
-	        document.getElementById('mapid').style.cursor = '';
-	}
 
 	mymap.on('click', onMapClick);
 
@@ -788,382 +720,11 @@ else
 	//Para que el cursor retorne estado por defecto en el mapa
 	mymap.on('mousedown', function (e) { document.getElementById('mapid').style.cursor = ''; });
 	
-	
-	
-	var helloPopup = L.popup().setContent('Mensaje desde boton');
 
-	
-
-
-
-
-
-
-
-	//Boton Ejemplo para mostrar evento click sobre el mapa
-
-
-    //Semana 13
-	//Boton Ejemplo para registrar 
-
-
-
-	//Semana 15  --  Boton Para Mapa de Calor
-
-	
-
-
-
-	var capaGeojsonEdificios = L.geoJson();
-	function cargarEdificios()
-	{
-		//Hago la peticion recupera-edificios-geojson mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'recupera-edificios-geojson'
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					//console.log(data);
-					mymap.removeLayer(capaGeojsonEdificios); 
-					geojsonFeatureEdificios= eval('('+data+')');
-					capaGeojsonEdificios = L.geoJson(geojsonFeatureEdificios, {onEachFeature: onEachFeatureEdificio }).addTo(mymap);	
-				}
-			});	
-	}
-
-	//Solucion tarea -- Sitios de Interes
-	var capaGeojsonSitiosInteres = L.geoJson();
-	function cargarSitiosInteres()
-	{
-		//Hago la peticion recupera-sitios-interes-geojson mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'recupera-sitios-interes-geojson'
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					//console.log(data);
-					mymap.removeLayer(capaGeojsonSitiosInteres); 
-					geojsonFeatureSitiosInteres= eval('('+data+')');
-					
-					//Agrego la capa de puntos
-					capaGeojsonSitiosInteres = L.geoJson(geojsonFeatureSitiosInteres, 
-					{
-						pointToLayer: function (feature, latlng) 
-						{
-							//Icons from https://mapicons.mapsmarker.com/
-							var smallIcon = L.icon(
-							{
-							iconSize: [27, 27],
-							iconAnchor: [13, 27],
-							popupAnchor:  [1, -24],
-							iconUrl: 'images/icono_'+feature.properties.type+'.png' 
-						});
-						
-							return L.marker(latlng, {icon: smallIcon}); 
-						},onEachFeature: onEachFeatureSitiosInteres 
-						
-					} ).addTo(mymap);
-
-				}
-			});	
-	}
-	
-
-	var estiloPoligonoEdificiosDefecto = 
-	{
-		radius: 8,
-		fillColor: "#ff7800",
-		color: "#000",
-		weight: 1,
-		opacity: 1,
-		fillOpacity: 0.8
-	};
-	
-	
-	var estiloPoligonoEdificioMouseEncima = 
-	{
-		radius: 8,
-		fillColor: "#000000",
-		color: "#000",
-		weight: 1,
-		opacity: 1,
-		fillOpacity: 0.8
-	};
-
-	function onEachFeatureEdificio(feature, layer) 
-	{
-		//Asigno estilo a cada edificio		
-		layer.setStyle(estiloPoligonoEdificiosDefecto);		
-		console.log(feature.properties.name);
-		if (feature.properties && feature.properties.name) {
-			layer.bindPopup('<b>NOMBRE: </b> '+feature.properties.name+'<br><b>TIPO: </b>' +feature.properties.tipo +'<br><b>UBICACION: </b>' +feature.properties.localiza);
-			
-			layer.on('mouseover', function() 
-			{ 
-				//Se agrego para cambiar el color del elemento cuando se ubique el mouse 
-				this.setStyle(estiloPoligonoEdificioMouseEncima);				
-				$('#mensaje_que_cambia').html('<h1>'+feature.properties.name+'</h1>');
-			});
-		        layer.on('mouseout', function() 
-			{
-				$('#mensaje_que_cambia').html('<h1>&nbsp;</h1>');
-				this.setStyle(estiloPoligonoEdificiosDefecto);
-			});	
-		}
-	}
-	
-
-	//Para cada reporte
-	function onEachFeatureSitiosInteres(feature, layer) 
-	{
-		//Asigno estilo a cada reporte		
-		console.log(feature.properties.name);
-		if (feature.properties && feature.properties.name) 
-		{
-			var mensaje = '<b>NOMBRE: </b> '+feature.properties.name;
-			mensaje +='<br><b>ID: </b>' + feature.properties.tipo;
-			mensaje +='<br><b>TIPO: </b>' +feature.properties.localizaci;
-			layer.bindPopup(mensaje);
-		}
-	}
-	
-
-	//RUTA MAS CORTA ENTRE DOS PUNTOS ( CLASE 10 )
-
-	var conteoClicks=1;
-	var coordenadasPuntoInicial = {};
-	var coordenadasPuntoFinal = {};
-	var puntoInicialMarcador = L.marker();
-	var puntoFinalMarcador = L.marker();
-
-	//Defino estas variables de forma global
-	var nuevasCoordenadasPuntoInicial = {};
-	var nuevasCoordenadasPuntoFinal = {};
-
-	//creo los iconos
-
-	var puntoInicialIcono = L.icon(
-	{
-		iconSize: [27, 27],
-		iconAnchor: [13, 27],
-		popupAnchor:  [1, -24],
-		iconUrl: 'images/punto_inicio.png' 
-	});
-
-	var puntoFinalIcono = L.icon(
-	{
-		iconSize: [27, 27],
-		iconAnchor: [13, 27],
-		popupAnchor:  [1, -24],
-		iconUrl: 'images/punto_final.png' 
-	});
-
-
-	//function para capturar punto inicial y punto final sobre el mapa 
-
-	function rutaMasCortaEntreDosPuntos(e)
-	{
-		if(conteoClicks==2){
-			coordenada_y = e.latlng.lat.toString();
-			coordenada_x = e.latlng.lng.toString();
-			coordenadasPuntoFinal={x:coordenada_x,y:coordenada_y};
-
-			mymap.removeLayer(puntoFinalMarcador); 
-			//puntoFinalMarcador = L.marker( [ coordenadasPuntoFinal['y'] , coordenadasPuntoFinal['x']  ]).addTo(mymap);
-
-			//Solucion tarea
-			//Agrego funcionalidad para que el punto final sea draggable 
-			puntoFinalMarcador = L.marker( [ coordenadasPuntoFinal['y'] , coordenadasPuntoFinal['x']  ],
-			{
-			  draggable: true,
-			  icon:puntoFinalIcono,
-			}).addTo(mymap)
-			.on('dragend', function() 
-			{
-				var nuevasCoordenadas = String(puntoFinalMarcador.getLatLng()).split(',');
-				var lat = nuevasCoordenadas[0].split('(');
-				var lng = nuevasCoordenadas[1].split(')');
-				nuevasCoordenadasPuntoFinal={x:lng[0], y:lat[1]};
-
-				//Actualizo las coordenadas del punto final
-				coordenadasPuntoFinal=nuevasCoordenadasPuntoFinal;
-
-				ejecutaCalculoRuteo(coordenadasPuntoInicial,nuevasCoordenadasPuntoFinal);
-			});
-
-			conteoClicks=1;
-			flag_ruteo=false;
-			document.getElementById('mapid').style.cursor = '';
-			ejecutaCalculoRuteo(coordenadasPuntoInicial,coordenadasPuntoFinal);
-		}else{
-			document.getElementById('mapid').style.cursor = 'crosshair';
-			coordenada_y = e.latlng.lat.toString();
-			coordenada_x = e.latlng.lng.toString();
-			coordenadasPuntoInicial={x:coordenada_x,y:coordenada_y};
-			
-			mymap.removeLayer(puntoInicialMarcador); 
-			puntoInicialMarcador = L.marker( [ coordenadasPuntoInicial['y'] , coordenadasPuntoInicial['x']  ],
-			{
-			  draggable: true,
-			  icon:puntoInicialIcono,
-			}).addTo(mymap)
-			.on('dragend', function() 
-			{
-				var nuevasCoordenadas = String(puntoInicialMarcador.getLatLng()).split(',');
-				var lat = nuevasCoordenadas[0].split('(');
-				var lng = nuevasCoordenadas[1].split(')');
-				nuevasCoordenadasPuntoInicial={x:lng[0], y:lat[1]};
-
-				//Actualizo las coordenadas del punto inicial
-				coordenadasPuntoInicial=nuevasCoordenadasPuntoInicial;
-
-				ejecutaCalculoRuteo(nuevasCoordenadasPuntoInicial,coordenadasPuntoFinal);
-			});
-			
-			conteoClicks=conteoClicks+1;
-			alert('Ingrese el punto de destino !');
-		}
-	}
-
-	var contadorRutasGeneradas = 0;
-	//Function que ejecuta el calculo de la ruta mas corta
-	function ejecutaCalculoRuteo(pInicial,pFinal)
-	{
-		console.log(pInicial);
-		console.log(pFinal);
-		
-			$.post("src/funciones.php",
-			{
-				//Ejecuto el caso genera-ruta-mascorta
-				peticion: 'genera-ruta-mascorta',
-				parametros: {  x1: pInicial.x,  y1: pInicial.y,  x2: pFinal.x,  y2: pFinal.y  }
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					console.log(data);
-					if(data=='NUEVA_RUTA_CREADA')
-					{
-						//Si se genero la ruta, ejecuto la funcion pintarRutaCreadaEntrePIniyPfin()
-						pintarRutaCreadaEntrePIniyPfin();
-						contadorRutasGeneradas = contadorRutasGeneradas+1;
-					}
-				}
-			});
-	}
-
-
-	var capaGeojsonreporte = L.geoJson();
-	var geojsonFeatureconsulta;
-
-	var capaGeojsonvias = L.geoJson();
-	var geojsonFeaturevia;
-	
-	
 	var geojsonFeatureconsulta2;
 
-
-	var capaGeojsonRuta = L.geoJson();
-	var geojsonFeatureRuta;
-	
-	//Creo estilo para la linea que representara la ruta
-	var miEstiloLinea1Ruta = {
-		"color": "#ff0000",
-		"weight": 1,
-		"opacity": 0.8
-	};
-	//Pinto la ruta en el mapa
-	function pintarRutaCreadaEntrePIniyPfin()
-	{
-		$.post("src/funciones.php",
-		{
-			peticion: 'recupera-ruta-geojson',
-		},
-		function(data, status)
-		{
-			console.log("Datos recibidos: " + data + "\nStatus: " + status);
-			if(status=='success')
-			{
-				mymap.removeLayer(capaGeojsonRuta); 
-				layerControl._update();
-				geojsonFeatureRuta= eval('('+data+')');
-
-				capaGeojsonRuta = L.geoJson(geojsonFeatureRuta,  {style: miEstiloLinea1Ruta  }).addTo(mymap);
-				layerControl.addOverlay(capaGeojsonRuta,"Ruta mas Corta ("+ contadorRutasGeneradas + " )" ,"Rutas");
-				mymap.addLayer(capaGeojsonRuta); 
-				layerControl._update();
-				capaGeojsonRuta.addTo( mymap );
-
-				//Informacion Sobre la ruta pintada
-				$.post("src/funciones.php",
-				{
-					peticion: 'info-ruta-creada',
-				},
-				function(data, status)
-				{
-					if(status=='success')
-					{
-						//Informacion Sobre la ruta pintada
-						$('#informacion_sobre_ruta').html('<br><b>Ruta creada</b>'+data);
-					}
-				});
-
-
-				
-			}
-		});
-	}
-// Recuperacion de los reportes de noticias
-    var capaGeojsonreporte = L.geoJson();
-	function cargarreporte()
-	{
-		//Hago la peticion recupera-reportes mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'Recupera-reportes'
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					
-					mymap.removeLayer(capaGeojsonreporte); 
-                    geojsonFeaturereporte= eval('('+data+')');
-                    
-
-                    capaGeojsonreporte = L.geoJson(geojsonFeaturereporte,
-                    {
-						pointToLayer: function (feature, latlng) 
-						{
-							
-							var smallIcon = L.icon(
-							{
-							iconSize: [27, 27],
-							iconAnchor: [13, 27],
-							popupAnchor:  [1, -24],
-							iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
-						});
-						
-							return L.marker(latlng, {icon: smallIcon}); 
-						},onEachFeature: onEachFeaturereporte
-						
-					} ).addTo(mymap);
-
-				}
-			});	
-	} 
-    
-
-
-    
-	//icono para cada reporte
+//Insertar reporte
+  //icono para cada reporte
 	function onEachFeaturereporte(feature, layer) 
 	{
 			
@@ -1180,29 +741,6 @@ else
 		}
     }	
 
-//para recuperar las vias
-function recuperarvias()
-	{
-		$.post("src/funciones.php",
-		{
-			peticion: 'recupera-via',
-		},
-		function(data, status)
-		{
-			console.log("Datos recibidos: " + data + "\nStatus: " + status);
-			if(status=='success')
-			{
-				mymap.removeLayer(capaGeojsonvias); 
-				layerControl._update();
-				geojsonFeaturevia= eval('('+data+')');
-
-				capaGeojsonvias = L.geoJson(geojsonFeaturevia,  {style: miEstiloLinea1Ruta  }).addTo(mymap);
-				mymap.addLayer(capaGeojsonvias); 
-				layerControl._update();
-				capaGeojsonvias.addTo( mymap );
-            }
-        });    
-    }   
 
 	//Evento click para boton boton-envio-reporte
 	$("#boton-envio-reporte").click(function() 
@@ -1270,9 +808,9 @@ function recuperarvias()
 
 //CONSULTA 1
 
-//icono para cada reporte
+	//icono para cada reporte
 
-function onEachFeatureconsulta(feature, layer) 
+	function onEachFeatureconsulta(feature, layer) 
 	{
 			
 		console.log(feature.properties.comuna);
@@ -1289,7 +827,7 @@ function onEachFeatureconsulta(feature, layer)
     }	
 
 
-$("#boton-envio-consulta").click(function() 
+	$("#boton-envio-consulta").click(function() 
 	{
 		console.log('Enviar formulario y cerrar ventana modal');
 		//capturar los datos del formulario
@@ -1355,9 +893,9 @@ $("#boton-envio-consulta").click(function()
 			});
 	}
 
-	 //CONSULTA 2
+//CONSULTA 2
 	
-function onEachFeatureconsulta2(feature, layer) 
+	function onEachFeatureconsulta2(feature, layer) 
 	{
 			
 		console.log(feature.properties.comuna);
@@ -1437,7 +975,6 @@ function onEachFeatureconsulta2(feature, layer)
                       clickClose: true,
                 });
         }
-
 //consulta 3 
  function onEachFeatureconsulta3(feature, layer) 
 	{
@@ -1456,7 +993,7 @@ function onEachFeatureconsulta2(feature, layer)
     }	
 
 
-$("#boton-envio-consulta3").click(function() 
+	$("#boton-envio-consulta3").click(function() 
 	{
 		console.log('Enviar formulario y cerrar ventana modal');
 		//capturar los datos del formulario
@@ -1520,37 +1057,8 @@ $("#boton-envio-consulta3").click(function()
   				clickClose: true,
 			});
 	}
-
-
-    //funcion mapa de calor Semana15
-	var arrayPoints='[';
-	function mapaCalor()
-	{
-		$.post("src/funciones.php",
-			{
-				peticion: 'recupera-geojson-mapacalor'
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					
-					var capaGeojson2 = L.geoJson(eval('('+data+')'), {onEachFeature: 
-						function onEachFeature(feature, layer) 
-						{
-							//var alea=Math.floor((Math.random() * 100) + 1);
-							arrayPoints+='['+feature.geometry.coordinates[1]+','+feature.geometry.coordinates[0]+',"15"],';	
-						} 
-					});
-					var y=arrayPoints.substring(0, arrayPoints.length - 1);
-					arrayPoints=y+'];';
-					var heat = L.heatLayer(eval(arrayPoints)).addTo(mymap);	
-				}
-			});
-	}
-
- 	
-	 //funcion para estilo del popup mapa de calor Semana15
+	
+//funcion para visualizar los reportes
 	function onEachFeatureStyledIconCluster(feature, layer) 
 	{
 		if (feature.properties) 
@@ -1604,43 +1112,74 @@ $("#boton-envio-consulta3").click(function()
 			});
 
 
-		///intento obtener geolocalización
-
-
-
-
-
-
-
-  ///intento 2
-
-
-
- 
-
-
-
-
-
 
 	}
 	
+//funcion para visualizar noticias del dia
+ 	function onEachFeatureStyledIconClustert(feature, layer) 
+	{
+		if (feature.properties) 
+		{	
+		    var mensaje="Barrio: <b>"+feature.properties.barrio+"</b><br>";
+		    mensaje+="Tipo: "+feature.properties.tipo+"<br>";
+		    mensaje+="descripcion: "+feature.properties.descripcion+"<br>";
+		    mensaje+="ID: "+feature.properties.id_reporte+"<br>";		
+		    layer.bindPopup(''+mensaje+'');
+		}
+	}
+	 //funcion mapa de calor Semana15
+	var capaGeojson5 = L.geoJson();
+	function cargarClustert()
+	{
+		$.post("src/funciones.php",
+			{
+				peticion: 'recupera-geojson-cluster-tiempo'
+			},
+			function(data, status){
+				console.log("Datos recibidos: " + data + "\nStatus: " + status);
+				if(status=='success')
+				{
+					//console.log(data);
+					mymap.removeLayer(capaGeojson5); 
+					geojsonFeature= eval('('+data+')');
 
+					var markers = L.markerClusterGroup();
+
+					capaGeojson5 = L.geoJson(geojsonFeature, 
+					{
+						pointToLayer: function (feature, latlng) 
+						{
+							//convierto en un string							
+							var smallIcon = L.icon(
+							{
+							  iconSize: [27, 27],
+							  iconAnchor: [13, 27],
+							  popupAnchor:  [1, -24],
+							  iconUrl: 'images/icono_'+feature.properties.tipo+'.png' 
+						        });
+
+							return L.marker(latlng, {icon: smallIcon}); 
+						},onEachFeature: onEachFeatureStyledIconClustert 
+
+					} );
 	
-	
+					markers.addLayer(capaGeojson5);		
+					mymap.addLayer(markers);					
+				}
+			});
+
+	}
 	
 	
 
 </script>
 <script type="text/javascript">
-  function actualizar(){location.reload(true);}
 //Función para actualizar cada 25 segundos(4000 milisegundos)
+ function actualizar(){location.reload(true);}
   setInterval("actualizar()",60000000);
 </script>
-
-
-
 </body>
+
 
 <div class="container-fluid">
 <br>	
