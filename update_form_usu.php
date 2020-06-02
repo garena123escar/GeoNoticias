@@ -143,18 +143,19 @@ if (!$edifico) {
 	<div>
 		<h1>Actualizar Datos de Usuario</h1><br>
 		<form action="update_usu.php" method="POST">
-            <label for="Descripcion">Actualizar Telefono</label>	
-				<input value="<?php echo $edifico->descripcion; ?>" required name="descripcion" type="text" id="descripcion" placeholder="descripcion">
+			<input type="hidden" name="id_usuario" value="<?php echo $edifico->id_usuario; ?>">
+			<div class="form-group">
+				<label for="telefono">Actualizar Telefono</label>	
+				<input value="<?php echo $edifico->telefono; ?>" required name="telefono" type="text" id="telefono" placeholder="telefono">
 			</div>
-            <label for="Descripcion">Actualizar Contraseña</label>	
-				<input value="<?php echo $edifico->descripcion; ?>" required name="descripcion" type="text" id="descripcion" placeholder="descripcion">
+            	<label for="contrasena">Actualizar Contraseña</label>	
+				<input value="<?php echo $edifico->contrasena; ?>" required name="contraseña" type="text" id="contraseña" placeholder="contraseña">
 			</div>
-
-            <label for="Descripcion">Actualizar Correo</label>	
-				<input value="<?php echo $edifico->descripcion; ?>" required name="descripcion" type="text" id="descripcion" placeholder="descripcion">
+            	<label for="correo">Actualizar Correo</label>	
+				<input value="<?php echo $edifico->correo; ?>" required name="correo" type="text" id="correo" placeholder="correo">
 			</div>
 			<br>
-			<input  id="boton_actualizar" value="Actualizar reporte "class="btn btn-danger bt-sm" type="submit"> <br>
+			<button type="submit">Actualizar Edificio</button>
 			<br><br>
 		</form>
 	</div>

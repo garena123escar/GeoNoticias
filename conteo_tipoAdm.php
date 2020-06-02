@@ -1,6 +1,6 @@
 <?php
 	include_once "config.php";
-	$sql = $databasePDO->query("select distinct r.count as conteo, b.barrio as barrio from reporte r, barrios b where st_intersects(b.geom,st_setsrid(st_makepoint (r.x,r.y),4326)) group by b.barrio");
+	$sql = $databasePDO->query("select r.count as conteo, r.tipo as tipo from reporte r group by r.tipo");
 	$resultados = $sql->fetchAll(PDO::FETCH_OBJ);
 ?>
 <!DOCTYPE html>
@@ -124,14 +124,14 @@
 
 	<div class="row">
 	<div class="col-xs-6  col-sm-12 col-md-12 col-lg-8 col-xl-12 text-center">
-	<h1>Cantidad De Noticias Por Barrio</h1>
+	<h1>Cantidad De Noticias Por Tipo De Reporte</h1>
 		<br>
 		<div>
 			<table class ="table table-hover table condensed tanle bordered table-centered text-center" border=8 >
 				<thead>
 					<tr>
 						<th>CANTIDAD</th>
-						<th>BARRIO</th>
+						<th>TIPO</th>
 						
 					</tr>
 				</thead>
@@ -139,7 +139,7 @@
 					<?php foreach($resultados as $edificio){ ?>
 						<tr>
 							<td><?php echo $edificio->conteo ?></td>
-							<td><?php echo $edificio->barrio ?></td>
+							<td><?php echo $edificio->tipo ?></td>
 							
 						</tr>
 					<?php } ?>

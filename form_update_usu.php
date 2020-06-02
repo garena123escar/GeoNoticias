@@ -152,7 +152,6 @@ los mismos como un arreglo
                         <th>Telefono</th>
                         <th>Contraseña</th>
                         <th>Correo</th>
-						<th>Actualizar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -164,7 +163,6 @@ los mismos como un arreglo
                             <td><?php echo $edificio->telefono ?></td>
                             <td><?php echo $edificio->contrasena ?></td>
                             <td><?php echo $edificio->correo ?></td>
-							<td><a href="<?php echo "update_form_usu.php?id_usuario=" . $edificio->id_usuario?>">Actualizar 📝</a></td>
 						</tr>
 					<?php } ?>
 				</tbody>

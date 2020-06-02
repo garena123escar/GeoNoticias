@@ -40,7 +40,7 @@ else
 
 
 
-	<!--Mapa de Calor Clase 15 -->
+	<!--Mapa de Calor -->
 	<!-- https://github.com/Leaflet/Leaflet.heat -->
 
 	<script src="lib/leaflet-heat.js"></script>
@@ -101,17 +101,6 @@ else
 	
 </head>
 <body>
-
-
-
-
-	<!-- Contenido HTML de la Ventana Modal -->
-<!--	<div id="ex1" class="modal">
-		<p>Hola este contenido del ejemplo 1 de una ventana modal</p>
-		<a href="#" rel="modal:close">Cerrar</a>
-	</div> 
--->
-
 	<!-- Contenido HTML de la Ventana Modal Ingresar Datos -->
 	<div id="ventana-consulta" class="modal">
 		<div class="modal-header">
@@ -384,6 +373,7 @@ else
 <input  id="borrar_map" value="Limpiar mapa"class="btn border-primary" onClick="location.href='javascript:location.reload()';"><br> <br>	<br>		
 <input  id="boton_ruteo" value="Ultimas Noticias "class="btn btn-danger bt-sm" onClick="location.href='UltimasNoticias.php';"> 
 <input  id="boton_reporte" value="Reporte por comunas "class="btn btn-danger bt-sm" >
+<input  id="mapa_reporte3" value="Reporte por tipo"class="btn btn-danger bt-sm" ><br>
 <input  id="boton_reporte_cliente" value="Insertar reporte "class="btn btn-danger bt-sm" >
 <input  id="boton_reporte_cliente1" value="Insertar Noticia en mi pos "class="btn btn-danger bt-sm" >
 <br><br>
@@ -400,19 +390,8 @@ else
 <input  id="boton_conteo" value="Conteo por tipos"class="btn border-danger"  onClick="location.href='conteo_tipo.php';"><br>	<br>
 <input  id="mapa_cluster" value="Visualizar Todas las Noticias"class="btn border-warning" ><br><br>
 <input  id="mapa_clustert" value="Visualizar Noticias del Dia"class="btn border-warning" ><br><br>
-
-
 </div>
-
-
-
-
-
-
-
 </div>
-
-
 </body>
 <script>
 	
@@ -559,8 +538,6 @@ else
 	//Evento tipo de noticia por comuna
 	$( "#boton_reporte" ).click(function() 
 	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "Ingrese el tipo de reporte y la comuna: " );
 	  	//Cambio de estado la vabriable bandera
 		flag_reporte=true;
@@ -587,7 +564,6 @@ else
 
 		$( "#mapa_calor" ).click(function() 
 	{
-	  	//vuelo hacia univalle
 	  	var flag_calor=false;
 		alert( "A continuación se muestra el mapa de calor:" );
 	  	//Cambio de estado la vabriable bandera
@@ -601,7 +577,6 @@ else
 
 		$( "#mapa_cluster" ).click(function() 
 	{
-	  	//vuelo hacia univalle
 	  	var flag_clustter=false;
 		alert( "A continuación se muestra el cluster de noticias:" );
 	  	//Cambio de estado la vabriable bandera
@@ -613,7 +588,6 @@ else
 
 		$( "#mapa_clustert" ).click(function() 
 	{
-	  	//vuelo hacia univalle
 	  	var flag_clustert=false;
 		alert( "A continuación se muestran las noticias del dia" );
 	  	//Cambio de estado la vabriable bandera
@@ -625,36 +599,20 @@ else
 
 		$( "#mapa_reporte2" ).click(function() 
 	{
-	  	//vuelo hacia univalle
-	  	
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "A continuación Eliga el usuario a consultar" );
 	  	//Cambio de estado la vabriable bandera
 	  	var flag_reporte2=true;
 		  lanzarVentanaconsulta2();
-
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-
 	});
 	var flag_reporte2=false;
 
 
 		$( "#mapa_reporte2" ).click(function() 
 	{
-	  	//vuelo hacia univalle
-	  	
-
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "A continuación Eliga el usuario a consultar" );
 	  	//Cambio de estado la vabriable bandera
 	  	var flag_reporte2=true;
 		  lanzarVentanaconsulta2();
-
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-
 	});
 
 
@@ -663,14 +621,10 @@ else
 	//Evento tipo de noticia por comuna
 	$( "#mapa_reporte3" ).click(function() 
 	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
 		alert( "Ingrese el tipo de reporte: " );
 	  	//Cambio de estado la vabriable bandera
 		flag_tipo=true;
-	  	//Cambio el cursor 	del mouse sobre el mapa
 	  	lanzarVentanaconsulta3();
-
 	});
 
 
@@ -685,7 +639,6 @@ else
   };
 
   ////TERMINA INTENTO 
-
 
 	function onMapClick(e) {
 	
@@ -707,19 +660,12 @@ else
 			//caso para lanzar ventana modal una vez de click sobre el mapa
 		render();
 		}
-	
-
-
-
 	}
 
 
 	mymap.on('click', onMapClick);
-
-	
 	//Para que el cursor retorne estado por defecto en el mapa
 	mymap.on('mousedown', function (e) { document.getElementById('mapid').style.cursor = ''; });
-	
 
 	var geojsonFeatureconsulta2;
 
