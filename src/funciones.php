@@ -325,7 +325,7 @@
 				((SELECT l FROM (SELECT  lg.barrio, lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
 				FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , b.barrio, r.tipo, r.descripcion, r.id_reporte FROM
 		   barrios as b, reporte as r
-		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), b.geom )
+		   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), b.geom ) 
 		   ) As lg   
 		   ) As f )  As fc;";
 	   
@@ -334,7 +334,25 @@
 				echo $row[0];
 				break;
 		}	
-
+	//Cluster Por Dia
+		case 'recupera-geojson-cluster-tiempo':
+			{
+					$sql3="SELECT row_to_json(fc)
+					FROM ( SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features
+					FROM (SELECT 'Feature' As type, ST_AsGeoJSON(lg.geom)::json As geometry, row_to_json
+					((SELECT l FROM (SELECT  lg.barrio, lg.tipo, lg.descripcion, lg.id_reporte  ) As l)) As properties
+					FROM (SELECT st_setsrid(st_makepoint(r.x,r.y),4326) as geom , b.barrio, r.tipo, r.descripcion, r.id_reporte FROM
+			   barrios as b, reporte as r
+			   WHERE st_within(st_setsrid(st_makepoint(r.x,r.y),4326), b.geom ) and r.fecha_registro = current_date
+			   ) As lg   
+			   ) As f )  As fc;";
+		   
+					$query3 = pg_query($dbcon,$sql3);
+					$row = pg_fetch_row($query3);
+					echo $row[0];
+					break;
+			}	
+	
 		case 'Reportes-x-tipo':
 			{
 				$tipo = $parametros['tipo'];

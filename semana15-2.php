@@ -406,8 +406,8 @@ else
 <input  id="boton_conteo" value="Conteo por barrios" class="btn border-danger" onClick="location.href='conteo_barrio.php';" ><br><br>
 <input  id="boton_conteo" value="Conteo por tipos"class="btn border-danger"  onClick="location.href='conteo_tipo.php';"><br><br>	
 <input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" ><br>	<br>
-<input  id="mapa_cluster" value="Cluster"class="btn border-warning" ><br><br>
-
+<input  id="mapa_cluster" value="Visualizar Todas las Noticias"class="btn border-warning" ><br><br>
+<input  id="mapa_clustert" value="Visualizar Noticias del Dia"class="btn border-warning" ><br><br>
 
 </div>
 
