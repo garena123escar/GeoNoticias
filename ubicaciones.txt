@@ -1,0 +1,32 @@
+Timestamp: 1590983192326
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983194325
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983438878
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983440878
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983515353
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983517353
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983745902
+Latitud: 3.424256
+Longitud: -76.5526016
+
+Timestamp: 1590983747901
+Latitud: 3.424256
+Longitud: -76.5526016
+

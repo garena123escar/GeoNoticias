@@ -77,7 +77,7 @@
 		{
 			$.post("src/funciones.php",
 			{
-				peticion: 'validar-login',
+				peticion: 'validar-login2',
 				parametros: {  login: $("#caja_usuario").val() ,  password: $("#caja_password").val()  },
 			},
 			function(data, status){
@@ -87,10 +87,10 @@
 					if(data=='ENTRAR')
 					{
 						//Ingresa al archivo semana15.php
-                        document.location.href ='semana15.php?logueado=si';	
+                        document.location.href ='semana15-2.php?logueado=si';	
 					}else
 					{
-						$("#caja_respuesta").html( '<br><b>USUARIO O PASSWORD ERROR !!</b>' );
+						$("#caja_respuesta").html( '<br><b>No es administrador, ingrese como usuario.</b>' );
 					}
 				}
 			});
@@ -110,7 +110,7 @@
 <div class="display-1 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4  text-center"></div>
 <div class="display-1 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-6  text-center"></div>
 <div class="display-1 col-4 col-sm-4 col-md-4 col-lg-4 col-xl-2  text-center">
-	<input  id="admin" value="¿Administrador?" class="btn border-danger" onClick="location.href='index2.php';"> <br>
+	<input  id="admin" value="Usuario" class="btn border-danger" onClick="location.href='index.php';"> <br>
 
 
 </div>
@@ -120,9 +120,8 @@
 
 </div>
 <div class="row">
-
 <div class="display-1 col-2 col-sm-3 col-md-2 col-lg-2 col-xl-3  text-center"></div>
-<div class="display-1 col-8 col-sm-6 col-md-8 col-lg-8 col-xl-6  text-center"><p>GeoNoticias <br> Universidad del Valle <br> <h1 class="display-3 text-center">Iniciar Sesion</h1></p></div>
+<div class="display-1 col-8 col-sm-6 col-md-8 col-lg-8 col-xl-6  text-center"><p>GeoNoticias <br> Universidad del Valle <br> <h1 class="display-3 text-center">Iniciar Administrador</h1></p></div>
 <div class="display-6 col-2 col-sm-3 col-md-2 col-lg-4 col-xl-3  text-center"></div>
 
 </div>
@@ -132,10 +131,7 @@
 		<div class="display-6 col-6 col-sm-6 col-md-8 col-lg-8 col-xl-6 borde1 text-center text-white"><br><br><br><br><br>	
 Usuario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="caja_usuario" class="text-center" value=""></input><br><br>	
 Password:&nbsp;&nbsp; <input type="password" id="caja_password"  value=""></input><br><br>
-<input  id="boton1" value="ingresar"class="btn btn-danger bt-sm" >
-
-
-<input  id="reg_usu" value="Registrarse"class="btn btn-danger bt-sm" onClick="location.href='/sig3/PaginaWeb/create_usu.php';"> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="boton1" value="ingresar"class="btn btn-danger bt-sm" >
 
 
 
@@ -144,12 +140,12 @@ Password:&nbsp;&nbsp; <input type="password" id="caja_password"  value=""></inpu
 
 	</div>
 </div>
+<div id="caja_respuesta"> </div>
 
 </body>
 
 
 
-<div id="caja_respuesta"> </div>
 
 <br>	<br><br>	<br>	
 <div class="container-fluid">

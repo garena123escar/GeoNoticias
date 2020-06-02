@@ -147,7 +147,7 @@ if (!$edifico) {
 			
 			<div>
 			<label for="tipo">Seleccione de la lista:</label> 
-			<select id="tipo" required name="tipo" id="tipo" placeholder="Tipo de Reporte">
+			<select id="tipo" required name="tipo" type="text" id="tipo" placeholder="Tipo de Reporte">
 			<option value="violencia">Violencia</option>
 			<option value="accidentes">Accidente</option>
 			<option value="hurtos">Hurtos</option>

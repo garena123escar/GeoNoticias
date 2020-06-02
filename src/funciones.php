@@ -236,7 +236,31 @@
 				$login = $parametros['login'];
 				$password = $parametros['password'];
 				
-				$sql="select usuario,contrasena,id_rol,id_usuario from usuarios where usuario='$login'  and contrasena = md5('$password');";
+				$sql="select usuario,contrasena,id_rol,id_usuario from usuarios where usuario='$login'  and contrasena = md5('$password') and id_rol='2';";
+				$query = pg_query($dbcon,$sql);
+				// si se obtiene mas de un registro en el select
+				$row=pg_fetch_row($query);
+				if($row>1)
+				{
+					echo "ENTRAR";
+					$_SESSION["usuario"] = $row[0];
+					$_SESSION["rol"] = $row[2];
+					$_SESSION["iduser"] = $row[3];
+				}else
+				{
+					echo "NOVALIDO";
+				}
+				break;
+		}
+
+
+		//Caso validar login administrador////
+			case 'validar-login2':
+		{
+				$login = $parametros['login'];
+				$password = $parametros['password'];
+				
+				$sql="select usuario,contrasena,id_rol,id_usuario from usuarios where usuario='$login'  and contrasena = md5('$password') and id_rol='1';";
 				$query = pg_query($dbcon,$sql);
 				// si se obtiene mas de un registro en el select
 				$row=pg_fetch_row($query);
