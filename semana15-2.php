@@ -406,8 +406,8 @@ else
 <input  id="boton_conteo" value="Conteo por barrios" class="btn border-danger" onClick="location.href='conteo_barrio.php';" ><br><br>
 <input  id="boton_conteo" value="Conteo por tipos"class="btn border-danger"  onClick="location.href='conteo_tipo.php';"><br><br>	
 <input  id="mapa_calor" value="Mapa de calor "class="btn border-warning" ><br>	<br>
-<input  id="mapa_cluster" value="Visualizar Todas las Noticias"class="btn border-warning" ><br><br>
-<input  id="mapa_clustert" value="Visualizar Noticias del Dia"class="btn border-warning" ><br><br>
+<input  id="mapa_cluster" value="Cluster"class="btn border-warning" ><br><br>
+
 
 </div>
 
@@ -447,9 +447,41 @@ else
 	
 
 
-	var roles= "<?php echo $_SESSION["rol"];?>"
-if (roles==1){
-		var flag_registrar1=false;
+
+	//Evento click para boton boton-envio-reporte
+
+
+
+		navigator.geolocation.watchPosition(render);
+
+
+	function render(pos)
+							{
+
+
+		// Capturo las coordenadas clickeadas sobre el mapa
+		coordenada_y1 = pos.coords.latitude.toString();
+		coordenada_x1 = pos.coords.longitude.toString();
+		// Envio las coordenadas a los campos dentro del form
+		$('#cox_form').val(coordenada_x1);
+		$('#coy_form').val(coordenada_y1);
+
+		//Limpio los campos del formulario
+		$('#opciones_form4').val("");
+		$('#descripcion_form1').val("");
+		$('#div_mensaje_ventana_reporte1').html("");
+
+		// lanzo ventana modal para registrar datos de reporte
+		$('#ventana-reporte1').modal(
+			{
+				closeExisting: false,
+				escapeClose: true,
+  				clickClose: true,
+			});
+	}
+
+	
+var flag_registrar1=false;
 
 		$( "#boton_reporte_cliente1" ).click(function() 
 	{
@@ -462,8 +494,6 @@ if (roles==1){
 
 		//mymap.flyTo([3.372472, -76.533229], 16);
 	});
-
-	//Evento click para boton boton-envio-reporte
 	$("#boton-envio-reporte1").click(function() 
 	{
 		console.log('Enviar formulario y cerrar ventana modal');
@@ -500,37 +530,6 @@ if (roles==1){
 		//Para cerrar la ventana modal	
 		$.modal.close();
 	});
-
-
-
-
-	function render(pos)
-	{
-		navigator.geolocation.watchPosition(render);
-
-
-		// Capturo las coordenadas clickeadas sobre el mapa
-		coordenada_y1 = pos.coords.latitude.toString();
-		coordenada_x1 = pos.coords.longitude.toString();
-		// Envio las coordenadas a los campos dentro del form
-		$('#cox_form').val(coordenada_x1);
-		$('#coy_form').val(coordenada_y1);
-
-		//Limpio los campos del formulario
-		$('#opciones_form4').val("");
-		$('#descripcion_form1').val("");
-		$('#div_mensaje_ventana_reporte1').html("");
-
-		// lanzo ventana modal para registrar datos de reporte
-		$('#ventana-reporte1').modal(
-			{
-				closeExisting: false,
-				escapeClose: true,
-  				clickClose: true,
-			});
-	}
-
-
 
 </script>
 
@@ -1615,88 +1614,9 @@ $("#boton-envio-consulta3").click(function()
 				}
 			});
 
-} else{
-
-var flag_registrar1=false;
-
-		$( "#boton_reporte_cliente1" ).click(function() 
-	{
-	  	//vuelo hacia univalle
-	//	mymap.flyTo([3.372472, -76.533229], 16);
-		alert( "A continuación se ingresará su ubicación:" );
-	  	//Cambio de estado la vabriable bandera
-		flag_registrar1=true;
-		render();
-
-		//mymap.flyTo([3.372472, -76.533229], 16);
-	});
-
-	//Evento click para boton boton-envio-reporte
-	$("#boton-envio-reporte1").click(function() 
-	{
-		console.log('Enviar formulario y cerrar ventana modal');
-		//capturar los datos del formulario
-
-		var cox_ = $('#cox_form').val();
-		var coy_ = $('#coy_form').val();
-		var opcion_1 = $('#opciones_form4').val();
-		var descripcion_1 = $('#descrip_form1').val();
-		var usuario_1= "<?php echo $_SESSION["iduser"];?>";
-		var usuario_2= "<?php echo $_SESSION["usuario"];?>";
+} 
 
 
-
-		//Hago la peticion registro-desde-ventana-modal mediante el metodo post a funciones.php		
-		$.post("src/funciones.php",
-			{
-				peticion: 'registro-desde-ventana-modal', 
-				parametros: {  x:cox_ ,  y: coy_,  tipo: opcion_1 , descripcion: descripcion_1, usuario : usuario_1,nombres:usuario_2}
-			},
-			function(data, status){
-				console.log("Datos recibidos: " + data + "\nStatus: " + status);
-				if(status=='success')
-				{
-					if(data=='NUEVO_REPORTE_CREADO')
-					{
-					   $('#div_mensaje_ventana_reporte1').html('<h2>Su reporte ha sido registrado</h2>');
-					}else
-					{
-						$('#div_mensaje_ventana_reporte1').html('<h2>Lo sentimos, no se puede realizar el reporte</h2>');	
-					}	
-				}
-			});	
-		//Para cerrar la ventana modal	
-		$.modal.close();
-	});
-
-
-
-
-	function render(pos)
-	{
-		navigator.geolocation.watchPosition(render);
-
-
-		// Capturo las coordenadas clickeadas sobre el mapa
-		coordenada_y1 = pos.coords.latitude.toString();
-		coordenada_x1 = pos.coords.longitude.toString();
-		// Envio las coordenadas a los campos dentro del form
-		$('#cox_form').val(coordenada_x1);
-		$('#coy_form').val(coordenada_y1);
-
-		//Limpio los campos del formulario
-		$('#opciones_form4').val("");
-		$('#descripcion_form1').val("");
-		$('#div_mensaje_ventana_reporte1').html("");
-
-		// lanzo ventana modal para registrar datos de reporte
-		$('#ventana-reporte1').modal(
-			{
-				closeExisting: false,
-				escapeClose: true,
-  				clickClose: true,
-			});
-	}
 
 
 
