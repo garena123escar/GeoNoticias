@@ -445,42 +445,6 @@ else
   <!-- Link para abir la ventana modal -->
 <script>
 	
-
-
-
-	//Evento click para boton boton-envio-reporte
-
-
-
-		navigator.geolocation.watchPosition(render);
-
-
-	function render(pos)
-							{
-
-
-		// Capturo las coordenadas clickeadas sobre el mapa
-		coordenada_y1 = pos.coords.latitude.toString();
-		coordenada_x1 = pos.coords.longitude.toString();
-		// Envio las coordenadas a los campos dentro del form
-		$('#cox_form').val(coordenada_x1);
-		$('#coy_form').val(coordenada_y1);
-
-		//Limpio los campos del formulario
-		$('#opciones_form4').val("");
-		$('#descripcion_form1').val("");
-		$('#div_mensaje_ventana_reporte1').html("");
-
-		// lanzo ventana modal para registrar datos de reporte
-		$('#ventana-reporte1').modal(
-			{
-				closeExisting: false,
-				escapeClose: true,
-  				clickClose: true,
-			});
-	}
-
-	
 var flag_registrar1=false;
 
 		$( "#boton_reporte_cliente1" ).click(function() 
@@ -494,6 +458,10 @@ var flag_registrar1=false;
 
 		//mymap.flyTo([3.372472, -76.533229], 16);
 	});
+
+
+	//Evento click para boton boton-envio-reporte
+
 	$("#boton-envio-reporte1").click(function() 
 	{
 		console.log('Enviar formulario y cerrar ventana modal');
@@ -530,6 +498,38 @@ var flag_registrar1=false;
 		//Para cerrar la ventana modal	
 		$.modal.close();
 	});
+
+
+
+
+
+	function render(pos)
+							{
+		navigator.geolocation.watchPosition(render);
+
+
+		// Capturo las coordenadas clickeadas sobre el mapa
+		coordenada_y1 = pos.coords.latitude.toString();
+		coordenada_x1 = pos.coords.longitude.toString();
+		// Envio las coordenadas a los campos dentro del form
+		$('#cox_form').val(coordenada_x1);
+		$('#coy_form').val(coordenada_y1);
+
+		//Limpio los campos del formulario
+		$('#opciones_form4').val("");
+		$('#descripcion_form1').val("");
+		$('#div_mensaje_ventana_reporte1').html("");
+
+		// lanzo ventana modal para registrar datos de reporte
+		$('#ventana-reporte1').modal(
+			{
+				closeExisting: false,
+				escapeClose: true,
+  				clickClose: true,
+			});
+	}
+
+
 
 </script>
 
