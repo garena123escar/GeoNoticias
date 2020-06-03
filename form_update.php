@@ -100,7 +100,7 @@ los mismos como un arreglo
 
     <div class="navbar-header ">
     <div class="display-1 col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center"> 	
-    <a class="navbar-brand text" href='semana15.php?logueado=si'>Volver al Geovisor</a>
+    <a class="navbar-brand text" href='semana15-2.php?logueado=si'>Volver al Geovisor</a>
 
 
     </div>

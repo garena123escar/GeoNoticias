@@ -29,7 +29,10 @@ $resultado = $sql->execute([$usuario, $nombre,$apellido, $telefono, $contrasena,
 #Con eso podemos evaluar
 if ($resultado === true) {
     # Redireccionar a la lista
-header ("location: index.php");	
+    echo "<script>
+    alert('Usuario Creado Exitosamente!!!');
+    window.location= 'index.php'
+</script>";
 } else {
     echo "Algo salio mal. Por favor verifica que la tabla exista";
 }
